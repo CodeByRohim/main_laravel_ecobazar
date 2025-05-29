@@ -1,0 +1,55 @@
+
+/* *News Letter Start Here */
+#newsletter {
+  width: 100%;
+  height: auto;
+  background: var(--gray-scale-gray-–-50);
+  display: flex;
+  align-items: center;
+  padding: 40px 0;
+}
+#newsletter .cntWrapper {
+   padding: 0 0 0 0; 
+}
+
+#newsletter .right-side a {
+  border-radius: 50%;
+  text-align: center;
+  margin: 0 4px;
+  transition: 0.3s;
+  padding: 9px 0;
+  color: var(--gray-scale-gray-–-900);
+}
+
+#newsletter .right-side a.active,
+#newsletter .right-side a:hover,
+#newsletter .right-side a:focus {
+  background: var(--branding-success);
+  color: var(--gray-scale-gray-–-100);
+}
+#newsletter .right-side a img:hover,
+#newsletter .right-side a img:focus {
+  filter: brightness(0) invert(1);
+}
+#newsletter .right-side a img.active{
+  filter: brightness(1) invert(0);
+}
+/* *News Letter End Hear */
+@media (max-width: 768px) {
+  #newsletter {
+    height: none; 
+    width: 100%;
+    transform: translateY(0%); 
+    margin-bottom: 0; 
+    padding: 15px 0;
+}
+#newsletter .cntWrapper {
+  padding: 10px !important;
+}
+#newsletter .right-side a img.active {
+  background-color: transparent;
+}
+#newsletter .right-side a {
+  padding: 4px 0;
+}
+}

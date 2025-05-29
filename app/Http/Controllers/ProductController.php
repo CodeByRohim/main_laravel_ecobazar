@@ -1,0 +1,185 @@
+<?php
+
+namespace App\Http\Controllers;
+use App\Models\Brand;
+use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
+
+class ProductController extends Controller
+{
+    public function index($id = null){
+       $products = Product::with(['category', 'brand'])->get();
+        $editProduct = Product::find($id) ?? null;
+        $categories = Category::get(); 
+        $brands = Brand::get();
+       
+        return view('Backend.Products.index', compact('products','editProduct','id', 'categories','brands'));
+    }
+
+    public function create($id = null){
+        // $categories = Category::where('status',true)->latest()->get();
+         $editProduct = Product::find($id) ?? null;
+        $brands = Brand::where('status',true)->latest()->get();
+        return view('Backend.Products.create', compact('editProduct','brands'));
+    }
+
+
+    public function storeOrUpdate(ProductRequest $request, $id = null){{
+    //    dd($request->all());
+       $slug = $this->slugGenerator($request->slug, $request->title);
+         if(!$slug && $id == null){
+            return to_route('products.create')->withErrors(['slug' => 'Slug already exists, please choose a different one.'])->withInput();
+        } else{     
+            $slug = str($request->title)->slug();
+         
+        }
+        
+        $product = Product::findOrNew($id);
+
+        // ========== FEATURED IMAGES UPLOAD ==========
+        if ($request->hasFile('featured_image')) {
+            if ($product->featured_image) {
+                // Delete old image if exists
+                Storage::disk('public')->delete($product->featured_image);
+            }
+            $name = $slug . "." . $request->featured_image->getClientOriginalExtension();
+            $featuredImage = $request->featured_image->storeAs('products', $name , 'public');
+            $product->featured_image = $featuredImage;
+        } 
+       
+        // ========== GALLERY IMAGES UPLOAD ==========
+        
+        if($request->hasFile('gallery_image')){
+            $galleryImages = [];
+            foreach($request->gallery_image as $index => $image){
+                if ($product->gallery_image) {
+                // Delete old image if exists
+               $oldGalleryImages = json_decode($product->gallery_image, true);
+                // Storage::disk('public')->delete($product->gallery_image);
+                Storage::disk('public')->delete($oldGalleryImages[$index] ?? '');
+
+            }
+            // $name = $slug . "-gallery." . $index . "." . $image->extension();
+            $name = $slug . "-gallery." . $index . "." . time() . "." . $image->extension();
+            $path = $image->storeAs('products/gallery', $name, 'public');
+            $galleryImages[] = $path;
+            
+            }
+           $product->gallery_image = json_encode($galleryImages);
+        }
+
+         //========== SAVE PRODUCT DATA ==========
+        $product->title = $request->title;
+        $product->slug = $slug;
+        $product->price = $request->price;
+        $product->selling_price = $request->selling_price;
+        $product->qty = $request->qty;
+        $product->brands_id = $request->brand;
+        $product->category_id = $request->category;
+        $product->short_detail = $request->short_detail;
+        $product->long_detail = $request->long_detail;
+        $product->alert_qty = $request->alert_qty ?? 0;
+        $product->sku = $request->sku;
+        $product->additional_info = $request->additional_info;
+        $product->video = $request->video_url;
+       
+        $product->save();
+
+      return to_route('products.index')->with('success', $id ? 'Product updated successfully' : 'Product created successfully');
+    }
+}
+   
+
+ private function slugGenerator($slug,$title, $id = null){
+        $isExists = Product::where('slug', $slug)->exists();
+        if($isExists){   
+            return false;
+        } else {
+            $slug = str($title)->slug();
+            $count = Product::whereLike('slug', "$slug%")->count();
+            if ($count > 0) {
+                $slug = $slug . '-' . ($count + 1);
+            }
+            return $slug;
+        }
+    }
+   function liveCategory(Request $request)
+    {
+        $search = $request->input('search');
+        $categories = Category::query()->where('status',true)->select('id', 'title');
+        if($search) {
+            $categories = $categories->whereLike('title', "%$search%");
+        } 
+        $categories = $categories->limit(3)->get();
+        $resArray = [];
+        foreach ($categories as $category) {
+            $resArray[] = [
+                'id' => $category->id,
+                'text' => $category->title,
+            ];
+        }
+      
+        return response()->json($resArray);
+    }
+    public function liveBrand(Request $request)
+{
+    $search = $request->input('search');
+    $brands = Brand::query()->where('status', true) ->select('id', 'title');
+
+    if ($search) {
+        $brands = $brands->whereLike('title', "%$search%");
+    }
+
+    $brands = $brands->limit(3)->get();
+
+    $resArray = [];
+    foreach ($brands as $brand) {
+        $resArray[] = [
+            'id' => $brand->id,
+            'text' => $brand->title,
+        ];
+    }
+
+    return response()->json($resArray);
+}
+
+
+public function getData(Request $request)
+{
+    $products = Product::select([
+        'id', 'title', 'price', 'selling_price',
+        'qty', 'alert_qty', 'short_detail', 'long_detail',
+        'featured_image', 'gallery_image', 'additional_info',
+        'video'
+    ]);
+
+    return DataTables::of($products)
+        ->addColumn('actions', function ($row) {
+            return '<a href="#" class="btn btn-sm btn-primary">Edit</a>';
+            
+        })
+        ->rawColumns(['actions']) // যদি HTML থাকে
+        ->make(true);
+}
+
+
+public function delete($id)
+{
+    $product = Product::findOrFail($id);
+    if ($product->featured_image) {
+        Storage::disk('public')->delete($product->featured_image);
+    }
+    if ($product->gallery_image) {
+        $galleryImages = json_decode($product->gallery_image, true);
+        foreach ($galleryImages as $image) {
+            Storage::disk('public')->delete($image);
+        }
+    }
+    $product->delete();
+    return redirect()->back()->with('success', 'Product deleted successfully');
+}
+}
