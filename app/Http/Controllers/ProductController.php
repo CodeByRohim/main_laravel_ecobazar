@@ -8,16 +8,79 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
-
+use Illuminate\Support\Str;
+// use DataTables;
 class ProductController extends Controller
 {
-    public function index($id = null){
-       $products = Product::with(['category', 'brand'])->get();
+    public function index(Request $request ,$id = null){
+        if($request->ajax()){
+         $products = Product::query()->select('*')->with('category','brand');
+
+         
+         return DataTables()->of($products)
+                 ->addIndexColumn()
+                 ->addColumn('featured_image', function($item){
+                    $url = $item->featured_image ? asset('storage/'  .$item->featured_image) : 'https://motobros.com/wp-content/uploads/2024/09/no-image.jpeg';
+                    return "<img src='$url' alt='Product Image' class='img-fluid' style='width: 50px; height: 50px; object-fit: cover;'/>";
+                 })
+                ->addColumn('gallery_image', function($item) {
+                    $images = json_decode($item->gallery_image, true); // convert JSON string to array
+                    $html = '';
+
+                    if (is_array($images)) {
+                        foreach ($images as $img) {
+                            $url = asset('storage/' . $img);
+                            $html .= "<img src='$url' alt='Product Image' style='width:50px; height:50px; object-fit:cover; margin-right:4px;' />";
+                        }
+                    } else {
+                        // fallback image
+                        $html = "<img src='https://motobros.com/wp-content/uploads/2024/09/no-image.jpeg' alt='No Image' style='width:50px; height:50px; object-fit:cover;' />";
+                    }
+
+                    return $html;
+                })
+                ->addColumn('status', function($item){
+                    return getGeneralStatus($item->status);
+
+                })
+                ->addColumn('actions', function($item){
+                    $editUrl = route('products.create', $item->id);
+                    $deleteUrl = route('products.delete', $item->id);
+                    return "<div class='btn-group'>
+                                <a href='$editUrl' class='btn btn-sm btn-primary'>Edit</a>
+                                 <a href='$deleteUrl' class='btn btn-sm btn-danger'>Delete</a>
+                            </div>";
+                               
+                            
+                 })
+                 ->addColumn('category', function($item){
+                    return $item->category?->title ?? 'N/A';
+                })
+                ->addColumn('brand', function($item){
+                    return $item->brand?->title ?? 'N/A';
+              })
+               ->addColumn('long_detail', function($item){
+                    $shortText =  Str::limit( strip_tags($item->long_detail),5) ?? 'N/A';
+                     $fullText = htmlspecialchars($item->long_detail); 
+                    return "<span>$shortText</span> 
+                    <a href='#' class='read-more' data-full='$fullText'>Read More</a>";
+              })
+                ->addColumn('short_detail', function($item){
+                    $shortText =  Str::limit( strip_tags($item->short_detail),5) ?? 'N/A';
+                    $fullText = htmlspecialchars($item->short_detail); 
+                    return "<span>$shortText</span> 
+                    <a href='#' class='read-more' data-full='$fullText'>Read More</a>";
+              })
+                 ->rawColumns(['featured_image','gallery_image','status','actions','category','brand','long_detail','short_detail'])->make(true);
+        }
+        $products = Product::with(['category', 'brand'])->get();
         $editProduct = Product::find($id) ?? null;
-        $categories = Category::get(); 
-        $brands = Brand::get();
+        // $categories = Category::get(); 
+        // $brands = Brand::get();
+   
+        return view('Backend.Products.index', compact('products','editProduct','id'));
        
-        return view('Backend.Products.index', compact('products','editProduct','id', 'categories','brands'));
+        // return view('Backend.Products.index', compact('products','editProduct','id', 'categories','brands'));
     }
 
     public function create($id = null){
@@ -29,7 +92,6 @@ class ProductController extends Controller
 
 
     public function storeOrUpdate(ProductRequest $request, $id = null){{
-    //    dd($request->all());
        $slug = $this->slugGenerator($request->slug, $request->title);
          if(!$slug && $id == null){
             return to_route('products.create')->withErrors(['slug' => 'Slug already exists, please choose a different one.'])->withInput();
@@ -71,7 +133,9 @@ class ProductController extends Controller
             }
            $product->gallery_image = json_encode($galleryImages);
         }
-
+        if($id){
+                    $product->status = $request->status ?? false;
+                }
          //========== SAVE PRODUCT DATA ==========
         $product->title = $request->title;
         $product->slug = $slug;
@@ -148,23 +212,23 @@ class ProductController extends Controller
 }
 
 
-public function getData(Request $request)
-{
-    $products = Product::select([
-        'id', 'title', 'price', 'selling_price',
-        'qty', 'alert_qty', 'short_detail', 'long_detail',
-        'featured_image', 'gallery_image', 'additional_info',
-        'video'
-    ]);
+// public function getData(Request $request)
+// {
+//     $products = Product::select([
+//         'id', 'title', 'price', 'selling_price',
+//         'qty', 'alert_qty', 'short_detail', 'long_detail',
+//         'featured_image', 'gallery_image', 'additional_info',
+//         'video'
+//     ]);
 
-    return DataTables::of($products)
-        ->addColumn('actions', function ($row) {
-            return '<a href="#" class="btn btn-sm btn-primary">Edit</a>';
+//     return DataTables::of($products)
+//         ->addColumn('actions', function ($row) {
+//             return '<a href="#" class="btn btn-sm btn-primary">Edit</a>';
             
-        })
-        ->rawColumns(['actions']) // যদি HTML থাকে
-        ->make(true);
-}
+//         })
+//         ->rawColumns(['actions']) // যদি HTML থাকে
+//         ->make(true);
+// }
 
 
 public function delete($id)

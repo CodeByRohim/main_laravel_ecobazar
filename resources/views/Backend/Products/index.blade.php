@@ -12,11 +12,13 @@
   <div class=" card shadow  mb-5 bg-white">
     {{-- {{dd($products)}} --}}
             <div class="card-body">
-              {{$products}}
+              {{-- {{$products}} --}}
               <table id="productTable" class="table table-bordered" >
                 <thead class="thead-dark" >
                   <tr class="text-center">
                     <th style="width: 100px;">sl. no</th>
+                    <th>Featured Image</th>
+                    <th>Gallery Image</th>
                     <th>Title</th>
                     <th>Category</th>
                     <th>Brand</th>
@@ -25,14 +27,13 @@
                     <th>Quantity</th>
                     <th>Alert Quantity</th>
                     <th>Short Details</th>
-                    <th>Long Details</th>
-                    <th>Featured Image</th>
-                    <th>Gallery Image</th>
+                    <th>Long Details</th>             
                     <th>Additional Info</th>
                     <th>Video</th>
+                    <th>Status</th>
                     <th style="width: 100px;">Actions</th>
                   </tr>
-                   @if($categories->isEmpty())
+                   {{-- @if($categories->isEmpty())
                   <tr>
                     <td colspan="13" class="text-center">No data found</td>
                   </tr>
@@ -81,50 +82,33 @@
                     <td class="">{{$product->video}}</td>
                     <td class="btn-group">
                       {{-- Edit Button --}}
-                    <a href="{{ route('products.create', $product->id) }}" class="btn btn-primary" 
+                    {{--<a href="{{ route('products.create', $product->id) }}" class="btn btn-primary" 
                   >Edit</a> 
                                     
                       <a href="{{ route('products.delete', $product->id) }}" class="btn btn-danger btnDelete" >Delete</a>
 
                     </td>
                   </tr>
-              @endforeach 
+              @endforeach  --}}
                 
               </table>
             </div>
           </div>
            <!-- Modal -->
-     @foreach($products as $product)
-     <div class="modal fade" id="longDetailModal{{ $product->id }}" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Long Description</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {!! nl2br(e(strip_tags(($product->long_detail)))) !!}      
-                </div>
-            </div>
-        </div>
+      <div class="modal fade" id="longDetailModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Full Description</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalBodyContent">
+        <!-- full content will go here -->
+      </div>
     </div>
-    @endforeach
-          @foreach($products as $product)
-    <div class="modal fade" id="shortDetailModal{{ $product->id }}" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Short Description</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {!! nl2br(e(strip_tags(($product->short_detail)))) !!}
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    @endforeach  
+  </div>
+</div>
+       
     <!-- End Modal -->
         {{-- <div class="card shadow p-3 mb-5 bg-white rounded ">
           <div  class="card-body position-relative">
@@ -205,46 +189,44 @@
                 </form>
           </div>
         </div> --}}
-
+         {{-- {{dd($products)}} --}}
 </section>
 @push('scripts')
 <script>
 let table = new DataTable('#productTable', {
   processing: true,
   serverSide: true,
-  ajax: "{{ route('products.data') }}",
+  responsive: true,
+  ajax: {
+   url: '{{ route('products.index') }}'
+  },
     columns: [
-        { DT_RowId: 'id', orderable: false, searchable: false,sortable: false },
-        { data: 'category', orderable: false, searchable: false },
-        { data: 'brand', orderable: false, searchable: false },      
+        { data: 'DT_RowIndex',orderable:false,sortable:false, searchable: false },
+        { data: 'featured_image', orderable: false, searchable: false },
+        { data: 'gallery_image', orderable: false, searchable: false },
         { data: 'title', orderable: false },
-        { data: 'price', orderable: false, searchable: false },
+        { data: 'category', orderable: false, searchable: true },
+        { data: 'brand', orderable: false},      
+        { data: 'price' },
         { data: 'selling_price', orderable: false, searchable: false },
         { data: 'qty', orderable: false, searchable: false },
         { data: 'alert_qty', orderable: false, searchable: false },
         { data: 'short_detail', orderable: false, searchable: false },
         { data: 'long_detail', orderable: false, searchable: false },
-          { data: 'featured_image', render: function(data) {
-              return `<img src="${data}" alt="Featured Image" width="50" height="50">`;
-          }},
-          { data: 'gallery_image', render: function(data) {
-              let images = JSON.parse(data);
-              return images.map(img => `<img src="${img}" alt="Gallery Image" width="50" height="50">`).join('');
-          }},
         { data: 'additional_info', orderable: false, searchable: false },
-        { data: 'video', orderable: false, searchable: false },
+        { data: 'video', orderable: false, searchable: false },    
+        { data: 'status', orderable: false, searchable: false },
         { data: 'actions', orderable: false, searchable: false }
     ]
-    // perPage: 10,
-    // perPageSelect: [10, 25, 50, 100],
-    // searchable: true,
-    // sortable: true,
-    // labels: {
-    //     placeholder: "Search...",
-    //     perPage: "{select} items per page",
-    //     noRows: "No data found",
-    //     info: "Showing {start} to {end} of {rows} entries"
-    // }
+    
+});
+
+$(document).on('click', '.read-more', function(e){
+    e.preventDefault();
+    const fullText = $(this).data('full');
+    $('#modalBodyContent').html(fullText);
+    $('#longDetailModal').modal('show');
+    $('#shortDetailModal').modal('show');
 });
 </script>
 @include('Backend.Category.scripts')

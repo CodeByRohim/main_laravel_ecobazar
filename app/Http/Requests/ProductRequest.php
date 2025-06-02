@@ -22,11 +22,8 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        
-      
-        
+          
       $id = $this->id; 
-    //   dd($this->all('id'));
         return [
             'title' => 'required|min:3',
             'selling_price' => 'nullable|numeric',

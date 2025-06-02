@@ -246,3 +246,15 @@ $(document).ready(function() {
   });
 });
 };
+
+
+// PRODUCT ALL CATEGORIES SELECT
+  document.getElementById('categorySelect').addEventListener('change', function () {
+        var selectedUrl = this.value;
+        if (selectedUrl) {
+            window.location.href = selectedUrl;
+        }
+    });
+
+
+

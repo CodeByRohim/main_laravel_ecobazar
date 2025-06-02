@@ -55,14 +55,15 @@
                         <div class="formd">
                             <h4>Just Say Hello!</h4>
                             <p>Do you fancy saying hi to me or you want to get started with your project and you need my help? Feel free to contact me.</p>
-                            <form action="">
+                            <form action="{{route('customerMessage.store')}}" method="post">
+                                @csrf
                                 <div class="d-flex">
-                                    <input type="text" placeholder="Full Name">
-                                    <input type="email" placeholder="youremail@gmail.com">
+                                    <input type="text" name="name" placeholder="Full Name">
+                                    <input type="email" name="email" placeholder="youremail@gmail.com">
                                 </div>
-                                <input class="sub" type="text" placeholder="Subject">
-                                <textarea name="" id="" placeholder="Message"></textarea>
-                                <button>Send Message</button>
+                                <input class="sub" name="subject" type="text" placeholder="Subject">
+                                <textarea name="message" id="" placeholder="Message"></textarea>
+                                <button type="submit">Send Message</button>
                             </form>
                         </div>
                     </div>

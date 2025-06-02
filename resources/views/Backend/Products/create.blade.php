@@ -150,7 +150,7 @@
           <div class="alert alert-danger mt-2">{{ $message }}</div>
           @enderror
         </div>
-          @if($editProduct)
+           @if($editProduct)
               <div class="form-check form-switch mt-2">
                   <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" {{ $editProduct?->status ? 'checked' : '' }}
                 name="status" value="{{ true }}" >                      
@@ -159,8 +159,9 @@
                       <a href="{{route('products.index')}}" class="bg-primary rounded text-white p-2">New</a> 
                   </div>
                 </div> 
-          @endif
-           
+          @endif 
+         
+
         <button type="submit" class="btn btn-primary mt-3">{{ $editProduct ? 'Update' : 'Submit'}}</button>
         </form>
       </div>     

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     {{-- Meta Description --}}
+    <meta name="description" content="@yield('meta_description', 'Buy quality products at affordable prices. Fast delivery, secure payment, and trusted customer service.')">
     <title>{{env('APP_NAME')}} - @yield('title')</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -24,6 +26,8 @@
     <link rel="stylesheet" href="{{asset('Frontend/assets/css/blog.css')}}">
     <link rel="stylesheet" href="{{asset('Frontend/assets/css/responsive.css')}}">
      <link rel="stylesheet" href="{{asset('Frontend/assets/css/newsletter and footer.css')}}">
+     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
 </head>
 <body>
     <!-- PRELOADER START HERE -->
@@ -75,22 +79,25 @@
         <section id="headerMiddle">
             <div class="container d-none d-lg-block">
                 <div class="row align-items-center">
-                    <div class="logo col-lg-3"><img class="img-fluid" src="{{asset('Frontend/assets/images/Logo.svg')}}" alt=""></div>
+                    <div class="logo col-lg-3"><img class="img-fluid" src="{{asset('Frontend/assets/images/Logo.svg')}}" alt="Logo"></div>
 
                     <div class="search col-lg-6 ">
-                        <form class="" action="search.php" method="GET">
+                        <form id="search" class="" action="{{route('frontend.search')}}" method="GET">
+                            @csrf
                             <div class="formGroup d-sm-none d-lg-block">
-                                <span class="iconify-icon"><iconify-icon icon="weui:search-outlined" width="20"
-                                        height="21"></iconify-icon></span> <input type="text" name="query" placeholder="Search">
+                                <span class="iconify-icon">
+                                    <iconify-icon icon="weui:search-outlined" width="20" height="21"></iconify-icon>
+                                </span> 
+                                <input type="search" value="{{ request()->search ?? '' }}" name="search" placeholder="Search">
+                                 <div class="searchResults position-absolute mb-0 bg-white w-100 p-3 rounded" style="display: none; z-index: 999;">
+                                       <ul>
+                                                                               
+                                       </ul>
+                                   </div>
                             </div>
                             <button type="submit">Search</button>
                             <!-- Display Results -->
-                                <?php
-                                    if (isset($_GET['query'])) {
-                                        include 'search.php';
-                                    }
-                                ?>
-                                
+                                  
                         </form>
                     </div>
 
@@ -99,7 +106,7 @@
 
                             <li class="d-inline-block"><a href="./wishlist.php">
                                     <span class="iconify-icon">                                       
-                                        <img class="img-fluid" width="30" height="32" src="{{asset('Frontend/assets/images/circum--heart.svg')}}" alt="">
+                                        <img class="img-fluid" width="30" height="32" src="{{asset('Frontend/assets/images/circum--heart.svg')}}" alt="Heart Icon">
                                     </span>
                                     </span></a></li>
                             <li class="d-inline-block">
@@ -132,7 +139,7 @@
                             <i class="fa-solid fa-bars"></i>
                         </a>
                     </div>
-                    <div class="logo"><img class="img-fluid" src="{{asset('Frontend/assets/images/Logo.svg')}}" alt=""></div>
+                    <div class="logo"><img class="img-fluid" src="{{asset('Frontend/assets/images/Logo.svg')}}" alt="Logo"></div>
                     <div class="smSearchBtn">
                         <button class="searchIcon"><span><i class="bi bi-search"></i></span></button>
                         <button class="closeIcon" style="display: none;"><span><i
@@ -146,7 +153,7 @@
                     aria-labelledby="offcanvasExampleLabel">
                     <div class="offcanvas-header justify-content-between">
                         <span class="offcanvas-title" id="offcanvasExampleLabel"><img class="img-fluid"
-                                src="{{asset('Frontend/assets/images/Logo.svg')}}" alt=""></span>
+                                src="{{asset('Frontend/assets/images/Logo.svg')}}" alt="Logo"></span>
                         <button type="button" class=" closeBtn justify-content-end" data-bs-dismiss="offcanvas"
                             aria-label="Close"><i class="bi bi-x-lg"></i></button>
                     </div>
@@ -180,7 +187,7 @@
 
                             <div class="d-flex align-items-center justify-content-evenly mt-3">
 
-                                <li><a href="tel:+219-555-0114"><img src="{{asset('Frontend/assets/images/Group.svg')}}" alt="">(219) 555-0114</a>
+                                <li><a href="tel:+219-555-0114"><img src="{{asset('Frontend/assets/images/Group.svg')}}" alt="Group Icon">(219) 555-0114</a>
                                 </li>
                             </div>
                         </ul>
@@ -210,7 +217,7 @@
                                         <div class="product-card">
                                             <div class="product-img">
                                                 <a href="#">
-                                                    <img class="img-fluid" src="{{asset('Frontend/assets/images/product img/Image.svg')}}" alt="">
+                                                    <img class="img-fluid" src="{{asset('Frontend/assets/images/product img/Image.svg')}}" alt="Product Image">
                                                 </a>
                                             </div>
                                             <div class="product-text">
@@ -224,7 +231,7 @@
                                         <div class="product-card">
                                             <div class="product-img">
                                                 <a href="#">
-                                                    <img class="img-fluid" src="{{asset('Frontend/assets/images/chinease cabbage.svg')}}" alt="">
+                                                    <img class="img-fluid" src="{{asset('Frontend/assets/images/chinease cabbage.svg')}}" alt="cabbage Image">
                                                 </a>
                                             </div>
                                             <div class="product-text">
@@ -239,7 +246,7 @@
                                         <div class="product-card">
                                             <div class="product-img">
                                                 <a href="#">
-                                                    <img class="img-fluid" src="{{asset('Frontend/assets/images/product img/Image.svg')}}" alt="">
+                                                    <img class="img-fluid" src="{{asset('Frontend/assets/images/product img/Image.svg')}}" alt="Product Image">
                                                 </a>
                                             </div>
                                             <div class="product-text">
@@ -254,7 +261,7 @@
                                         <div class="product-card">
                                             <div class="product-img">
                                                 <a href="#">
-                                                    <img class="img-fluid" src="{{asset('Frontend/assets/images/product img/Image.svg')}}" alt="">
+                                                    <img class="img-fluid" src="{{asset('Frontend/assets/images/product img/Image.svg')}}" alt=" Product Image">
                                                 </a>
                                             </div>
                                             <div class="product-text">
@@ -280,73 +287,39 @@
 
                     <div class="col-lg-2 d-none d-lg-block">
 
-                        <form action="/submit-category" method="POST" class="category-form">
-
-                            <div class="d-flex align-items-center">
-                                <span class="iconify-icon">
-                                    <img src="{{asset('Frontend/assets/images/menu 1.svg')}}" alt="Menu Icon" width="24" height="24">
-                                </span>
-                                <select id="categorySelect" name="category" class="form-selects">
-                                    <option class="selected">All Categoriesw</option>
-                                    @forelse($categories as $category)
-                                    <option value="{{ $category->id }}" {{ old('category') == $category->id ? 'selected' : '' }}>
+                       
+                    <form id="categoryForm" class="category-form">
+                        <div class="d-flex align-items-center">
+                            <span class="iconify-icon">
+                                <img src="{{ asset('Frontend/assets/images/menu 1.svg') }}" alt="Menu Icon" width="24" height="24">
+                            </span>
+                            <select id="categorySelect" name="category" class="form-selects">
+                                <option value="" class="selected">All Categories</option>
+                                
+                                @foreach($categories as $category)
+                                    <option value="{{ route('frontend.categories.products', $category->slug) }}">
                                         {{ $category->title }}
                                     </option>
-                                    @empty
-                                    <option value="">No categories available</option>
-                                    @endforelse
-                                    {{-- <option class="">Meat</option>
-                                    {{-- <option class="">Home & Kitchen</option>
-                                    <option class="">Fashion</option>
-                                    <option class="">Food</option>
-                                    <option class="">Fruits</option> --}}
-                                    {{-- @if($categories->isEmpty())
-                                    <tr>
-                                      <td colspan="3" class="text-center">No data found</td>
-                                    </tr>
-                                    @endif --}}
-                                   
-                                 {{-- @forelse($categories as $index=>$category):
-                                    <tr class="text-center">
-                                      <td> {{ ++$index}} </td>
-                                      <td class="">{{ $category->title }}</td>
-                                      @empty($category->title)
-                                        <td colspan="3" class="text-center">No data found</td>
-                                      @endforelse --}}
-                                     
-                                </select>
+                                @endforeach
+                            </select>
+                            <span class="down"><i class="bi bi-chevron-down"></i></span>
+                        </div>
+                    </form>
 
-                                <span class="down"><i class="bi bi-chevron-down"></i></span>
-                            </div>
-                        </form>
+
                     </div>
                     <!-- SM ALL CATEGORIES START -->
                     <ul
                         class="navbar-nav d-flex align-items-center flex-row gap-3 overflow-scroll categories d-lg-none categorie">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Meat</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Vegetable</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Food</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Snacks</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Fish</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Breakfast</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Organic</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Mixture</a>
-                        </li>
+                          @forelse($categories as $category)                      
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('frontend.categories.products',  $category->slug)}}"> {{ $category->title }}</a>
+                                    </li>    
+                                    @empty
+                                     <li class="nav-item">
+                                        <a class="nav-link" href="#"> {{ $category->title }}No categories available</a>
+                                    </li>
+                            @endforelse
 
                     </ul>
                     <!------ SM ALL CATEGORIES END ------->
@@ -362,7 +335,7 @@
                                         </li>
 
                                         <li class="nav-item dropdown">
-                                            <a href="./shop.php" class="nav-link" id="homeDropdown"
+                                            <a href="{{route('category.archive')}}" class="nav-link" id="homeDropdown"
                                                 data-bs-toggle="dropdow" aria-expanded="fals">Shop<span
                                                     class="down"><i class="bi bi-chevron-down"></i></span>
                                                 </a>
@@ -377,8 +350,14 @@
                                         </li>
 
 
-                                        <li class="nav-item"><a href="./productdetails.php" class="nav-link">Pages<span class="down"><i
-                                                        class="bi bi-chevron-down"></i></span></a></li>
+                                       @isset($product)
+                                            <li class="nav-item">
+                                                <a href="{{ route('frontend.single_product', $product->slug) }}" class="nav-link">
+                                                    Pages <span class="down"><i class="bi bi-chevron-down"></i></span>
+                                                </a>
+                                            </li>
+                                        @endisset
+
                                         <li class="nav-item"><a href="./blog.php" class="nav-link">Blog<span class="down"><i
                                                         class="bi bi-chevron-down"></i></span></a></li>
                                         <li class="nav-item"><a href="{{route('about')}}" class="nav-link">About Us<span class="down"><i
@@ -443,7 +422,7 @@
    @yield ('about')
    @yield('contact')
    @yield('shop')
-   @yield('testingCategory')
+   @yield('single_product')
 
      </main>
       <!-- NEWSLETTER SECTION START -->
@@ -575,5 +554,45 @@
     <script src="{{asset('Frontend/assets/js/venobox.min.js')}}"></script>
     <script src="{{asset('Frontend/assets/js/jquery.countdown.min.js')}}"></script>
     <script src="{{asset('Frontend/assets/js/app.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+           $('#search input[type="search"]').keyup(function(){
+            let value = $(this).val()
+            if(value.length >= 3){
+                // ajax
+                $.ajax({
+                    method: 'GET',
+                    url: '{{ route('frontend.live_search') }}',
+                    data: {search: value},
+                   
+                    success: function(data){
+                         let  HTML = [];
+                    if(data.length > 0){
+                        data.forEach(item => {
+                        let url = '{{ route('frontend.single_product', '::slug') }}'
+                        url = url.replace('::slug', item.slug)
+                        let li = `<li><a class="my-2" href="${url}">${ item.title }</a></li>`;
+                        HTML.push(li)
+                        }),
+                    
+                        $('.searchResults ul').html(HTML.join(''))
+                        $('.searchResults').slideDown();
+                      }
+                   },
+
+                    error: function(xhr,status,error){
+                       
+                    }
+
+                })
+            }
+            
+            if(value.length == 0){
+                 $('.searchResults ul').html('')
+                $('.searchResults').slideUp();
+            }
+           })
+        })
+    </script>
 </body>
 </html>

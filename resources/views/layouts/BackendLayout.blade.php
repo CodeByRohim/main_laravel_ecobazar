@@ -85,7 +85,14 @@
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
-
+           <!-- customer message -->
+              <li class="menu-item {{request()->routeIs('customerMessage') ? 'active' : ''}}">
+                <a href="{{route('customerMessage.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Customer Message</div>
+              </a>
+            </li>
+            
             <!-- Layouts -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -305,6 +312,7 @@
       @yield('Categories')
       @yield('AllProducts')
       @yield('AddProduct')  
+      @yield('CustomerMessage')
     </main>
  <!-- Footer -->
  <footer class="content-footer footer bg-footer-theme">

@@ -1,6 +1,7 @@
 @extends('layouts.FrontendLayout')
 @section('home')
 @section('title',('Home'))
+{{-- {{dd($products)}} --}}
         <!------- BANNER STARTS HERE ------->
         <section id="banner">
             <div class="slider">
@@ -115,10 +116,10 @@
                     <nav class="d-none d-lg-block">                     
 
                         <ul class="d-flex align-items-center justify-content-center">
-                            <li ><a type="button" data-filter="all">All</a></li>
-                            <li><a type="button" data-filter=".category-a">Vegetable</a></li>
-                            <li><a type="button" data-filter=".category-b">Fruit</a></li>
-                            <li><a type="button" data-filter=".category-c">Meat & Fish</a></li>
+                            <li><a type="button" data-filter="all">All</a></li>
+                            @foreach($categories->take(4) as $category)
+                            <li ><a type="button" class="" data-filter=".{{ $category->slug}}">{{$category->title}}</a></li>          
+                            @endforeach                         
                             <li><a type="button" data-filter="all">View All</a></li>
                         </ul>
                     </nav>
@@ -127,15 +128,10 @@
                         <li class="nav-item">
                             <a class="nav-link" type="button" data-filter="all">All</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  type="button" data-filter=".category-a">Vegetable</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" type="button" data-filter=".category-b">Fruit</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link text-center d-inline-flex" type="button" data-filter=".category-c">Meat & Fish</a>
-                        </li>
+                         @foreach($categories->take(4) as $category)
+                            <li ><a type="button" data-filter="{{ $category->slug}}">{{$category->title}}</a></li>
+                            @endforeach
+                        
                         <li class="nav-item">
                             <a class="nav-link text-center d-flex" type="button" data-filter="all">View All</a>
                         </li>
@@ -144,297 +140,68 @@
                 </div>
 
                 <div class="row mixit">
-
-                    <!-- product 1 start -->
-                    <div class="productCard col-lg-3 mix category-b" data-order="2">
-
-                        <img class="img-fluid" src="{{asset('Frontend/assets/images/product img/Product Image.svg')}}" alt="">
-
-                        <div class="product-text d-flex align-items-center justify-content-between">
-                            <div class="cnt">
-                                <h3>Green Apple</h3>
-                                <h2>$14.99 <span>$20.99</span></h2>
-                                <span class="groupStar">
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd"></i>
-                                </span>
-                            </div>
-                            <div class="bag"><span><img src="{{asset('Frontend/assets/images/Rectangle.svg')}}" alt=""></span></div>
-                        </div>
-                        <div class="overlay">
-                            <div class="sale">
-                                <div class=""><span>
-                                        <p class="text-start">Sale 50%</p>
-                                    </span></div>
-                                <div class="heart"><span class="heart-icon"><img width="24px"
-                                            src="{{asset('Frontend/assets/images/Heart(1).svg')}}" alt=""></span></div>
-                            </div>
-                            <div class="eye d-inline-block"><span class="eye-icon"><img width="24px"
-                                        src="{{asset('Frontend/assets/images/product img/Eye 1.svg')}}" alt=""></span></div>
-                            <div class="bag newBag"><span><img src="{{asset('Frontend/assets/images/product img/Rectangle.svg')}}" alt=""></span>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- products 1 end -->
-
-                    <!-- products 2 start -->
-                    <div class="productCard col-lg-3 mix category-b" data-order="2">
-                        <!-- <span class="product-img"> -->
-                        <img class="img-fluid" src="{{asset('Frontend/assets/images/product img/Image.svg')}}" alt="">
-                        <!-- </span> -->
-                        <div class="product-text d-flex align-items-center justify-content-between">
-                            <div class="cnt">
-                                <h3>Surjapur Mango</h3>
-                                <h2>$14.99 </h2>
-                                <span class="groupStar">
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd"></i>
-                                </span>
-                            </div>
-                            <div class="bag"><span><img src="{{asset('Frontend/assets/images/Rectangle.svg')}}" alt=""></span></div>
-                        </div>
-                        <div class="overlay">
-                            <div class="sale">
-                                <div class=""><span>
-                                        <p class="text-start">Sale 50%</p>
-                                    </span></div>
-                                <div class="heart"><span class="heart-icon"><img width="24px"
-                                            src="{{asset('Frontend/assets/images/Heart(1).svg')}}" alt=""></span></div>
-                            </div>
-                            <div class="eye d-inline-block"><span class="eye-icon"><img width="24px"
-                                        src="{{asset('Frontend/assets/images/product img/Eye 1.svg')}}" alt=""></span></div>
-                            <div class="bag newBag"><span><img src="{{asset('Frontend/assets/images/product img/Rectangle.svg')}}" alt=""></span>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- produts 2 end -->
-
-
-                    <!-- products 3 start -->
-                    <div class="productCard col-lg-3 mix category-b category-c" data-order="3">
-                        <!-- <span class="product-img"> -->
-                        <img class="img-fluid" src="{{asset('Frontend/assets/images/product img/Product Image(1).svg')}}" alt="">
-                        <!-- </span> -->
-                        <div class="product-text d-flex align-items-center justify-content-between">
-                            <div class="cnt">
-                                <h3>Red Tomatos</h3>
-                                <h2>$14.99 <!--<span>$20.99</span>--></h2>
-                                <span class="groupStar">
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd"></i>
-                                </span>
-                            </div>
-                            <div class="bag"><span><img src="{{asset('Frontend/assets/images/Rectangle.svg')}}" alt=""></span></div>
-                        </div>
-                        <div class="overlay">
-                            <div class="sale">
-                                <div class=""><span>
-                                        <p class="text-start">Sale 50%</p>
-                                    </span></div>
-                                <div class="heart"><span class="heart-icon"><img width="24px"
-                                            src="{{asset('Frontend/assets/images/Heart(1).svg')}}" alt=""></span></div>
-                            </div>
-                            <div class="eye d-inline-block"><span class="eye-icon"><img width="24px"
-                                        src="{{asset('Frontend/assets/images/product img/Eye 1.svg')}}" alt=""></span></div>
-                            <div class="bag newBag"><span class=""><img src="{{asset('Frontend/assets/images/product img/Rectangle.svg')}}"
-                                        alt=""></span></div>
-
-                        </div>
-                    </div>
-                    <!-- products 3 end -->
-
-
-                    <!-- products 4 start -->
-                    <div class="productCard col-lg-3 mix category-a" data-order="1">
-
-                        <img class="img-fluid" src="{{asset('Frontend/assets/images/product img/Product Image(2).svg')}}" alt="">
-
-                        <div class="product-text d-flex align-items-center justify-content-between">
-                            <div class="cnt">
-                                <h3>Fresh Cauliflower</h3>
-                                <h2>$14.99 <!--<span>$20.99</span>--></h2>
-                                <span class="groupStar">
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd"></i>
-                                </span>
-                            </div>
-                            <div class="bag"><span><img src="{{asset('Frontend/assets/images/Rectangle.svg')}}" alt=""></span></div>
-                        </div>
-                        <div class="overlay">
-                            <div class="sale">
-                                <div class=""><span>
-                                        <p class="text-start">Sale 50%</p>
-                                    </span></div>
-                                <div class="heart"><span class="heart-icon"><img width="24px"
-                                            src="{{asset('Frontend/assets/images/Heart(1).svg')}}" alt=""></span></div>
-                            </div>
-                            <div class="eye d-inline-block"><span class="eye-icon"><img width="24px"
-                                        src="{{asset('Frontend/assets/images/product img/Eye 1.svg')}}" alt=""></span></div>
-                            <div class="bag newBag"><span><img src="{{asset('Frontend/assets/images/product img/Rectangle.svg')}}" alt=""></span>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- products 4 end -->
-
-                    <!-- product 5 start -->
-                    <div class="productCard col-lg-3 mix category-a" data-order="1">
-
-                        <img class="img-fluid" src="{{asset('Frontend/assets/images/product img/Product Image(3).svg')}}" alt="">
-
-                        <div class="product-text d-flex align-items-center justify-content-between">
-                            <div class="cnt">
-                                <h3>Green Lettuce</h3>
-                                <h2>$14.99 <!--<span>$20.99</span>--></h2>
-                                <span class="groupStar">
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd"></i>
-                                </span>
-                            </div>
-                            <div class="bag"><span><img src="{{asset('Frontend/assets/images/Rectangle.svg')}}" alt=""></span></div>
-                        </div>
-                        <div class="overlay">
-                            <div class="sale">
-                                <div class=""><span>
-                                        <p class="text-start">Sale 50%</p>
-                                    </span></div>
-                                <div class="heart"><span class="heart-icon"><img width="24px"
-                                            src="{{asset('Frontend/assets/images/Heart(1).svg')}}" alt=""></span></div>
-                            </div>
-                            <div class="eye d-inline-block"><span class="eye-icon"><img width="24px"
-                                        src="{{asset('Frontend/assets/images/product img/Eye 1.svg')}}" alt=""></span></div>
-                            <div class="bag newBag"><span><img src="{{asset('Frontend/assets/images/product img/Rectangle.svg')}}" alt=""></span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- product 6 start -->
-                    <div class="productCard col-lg-3 mix category-b category-c" data-order="3">
-
-                        <img class="img-fluid" src="{{asset('Frontend/assets/images/product img/Image(1).svg')}}" alt="">
-
-                        <div class="product-text d-flex align-items-center justify-content-between">
-                            <div class="cnt">
-                                <h3>Eggplant</h3>
-                                <h2>$14.99 <!--<span>$20.99</span>--></h2>
-                                <span class="groupStar">
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd"></i>
-                                </span>
-                            </div>
-                            <div class="bag"><span><img src="{{asset('Frontend/assets/images/Rectangle.svg')}}" alt=""></span></div>
-                        </div>
-                        <div class="overlay">
-                            <div class="sale">
-                                <div class=""><span>
-                                        <p class="text-start">Sale 50%</p>
-                                    </span></div>
-                                <div class="heart"><span class="heart-icon"><img width="24px"
-                                            src="{{asset('Frontend/assets/images/Heart(1).svg')}}" alt=""></span></div>
-                            </div>
-                            <div class="eye d-inline-block"><span class="eye-icon"><img width="24px"
-                                        src="{{asset('Frontend/assets/images/product img/Eye 1.svg')}}" alt=""></span></div>
-                            <div class="bag newBag"><span><img src="{{asset('Frontend/assets/images/product img/Rectangle.svg')}}" alt=""></span>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- product 6 end -->
-
-                    <!-- product 7 start -->
-                    <div class="productCard col-lg-3">
-
-                        <img class="img-fluid" src="{{asset('Frontend/assets/images/product img/Image(2).svg')}}" alt="">
-
-                        <div class="product-text d-flex align-items-center justify-content-between">
-                            <div class="cnt">
-                                <h3>Green Chilli</h3>
-                                <h2>$14.99 <!--<span>$20.99</span>--></h2>
-                                <span class="groupStar">
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd"></i>
-                                </span>
-                            </div>
-                            <div class="bag"><span><img src="{{asset('Frontend/assets/images/Rectangle.svg')}}" alt=""></span></div>
-                        </div>
-                        <div class="overlay">
-                            <div class="sale">
-                                <div class=""><span>
-                                        <p class="text-start">Sale 50%</p>
-                                    </span></div>
-                                <div class="heart"><span class="heart-icon"><img width="24px"
-                                            src="{{asset('Frontend/assets/images/Heart(1).svg')}}" alt=""></span></div>
-                            </div>
-                            <div class="eye d-inline-block"><span class="eye-icon"><img width="24px"
-                                        src="{{asset('Frontend/assets/images/product img/Eye 1.svg')}}" alt=""></span></div>
-                            <div class="bag newBag"><span><img src="{{asset('Frontend/assets/images/product img/Rectangle.svg')}}" alt=""></span>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- product 7 end -->
-
-                    <!-- product 8 start -->
-                    <div class="productCard col-lg-3 mix category-a" data-order="1">
-
-                        <img class="img-fluid" src="{{asset('Frontend/assets/images/product img/Image(3).svg')}}" alt="">
-
-                        <div class="product-text d-flex align-items-center justify-content-between">
-                            <div class="cnt">
-                                <h3>Eggplant</h3>
-                                <h2>$14.99 <!--<span>$20.99</span>--></h2>
-                                <span class="groupStar">
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
-                                    <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd"></i>
-                                </span>
-                            </div>
-                            <div class="bag"><span><img src="{{asset('Frontend/assets/images/Rectangle.svg')}}" alt=""></span></div>
-                        </div>
-                        <div class="overlay">
-                            <div class="sale">
-                                <div class=""><span>
-                                        <p class="text-start">Sale 50%</p>
-                                    </span></div>
-                                <div class="heart"><span class="heart-icon"><img width="24px"
-                                            src="{{asset('Frontend/assets/images/Heart(1).svg')}}" alt=""></span></div>
-                            </div>
-                            <div class="eye d-inline-block"><span class="eye-icon"><img width="24px"
-                                        src="{{asset('Frontend/assets/images/product img/Eye 1.svg')}}" alt=""></span></div>
-                            <div class="bag newBag"><span><img src="{{asset('Frontend/assets/images/product img/Rectangle.svg')}}" alt=""></span>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- product 8 end -->
+                @forelse($products as $product)
+                    @php
+                    $url =  route('frontend.single_product', $product->slug);
+                    @endphp
+                        <div class="productCard col-lg-3 mix {{ $product->category->slug}}">                   
+                            
+                                <img class="img-fluid" src="{{ getProductImage($product) }}" alt="{{ $product->title }}">
+                                <div class="product-text d-flex align-items-center justify-content-between">
+                                   <a href="{{$url}}">
+                                    <div class="cnt">
+                                        <h3>{{$product->title}}</h3>
+                                        <h2>${{$product->selling_price}} <span>${{$product->price}}</span></h2>
+                                        <span class="groupStar">
+                                            <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
+                                            <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
+                                            <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
+                                            <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
+                                            <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd"></i>
+                                        </span>
+                                    </div>
+                                    </a>
+                                    <span
+                                        x-data="{ hover: false }"
+                                        x-on:mouseenter="hover = true"
+                                        x-on:mouseleave="hover = false"
+                                        class="bagOverlayCss"
+                                        :class="{ 'newBag': hover }"
+                                    >
+                                        <img
+                                            class="img"
+                                            :src="hover
+                                                ? '{{ asset('Frontend/assets/images/product img/Rectangle.svg') }}'
+                                                : '{{ asset('Frontend/assets/images/Rectangle.svg') }}'"
+                                            alt="Bag"
+                                        >
+                                    </span>
+                                <div class="overlay">
+                                    <div class="sale">
+                                        <div class=""><span> <p class="text-start">Sale 50%</p> </span></div>
+                                        <div class="heartAndeye">
+                                            <div class="heart"><span class="heart-icon"><img width="24px" src="{{asset('Frontend/assets/images/Heart(1).svg')}}" alt=""></span></div>
+                                
+                                        <a href="{{$url}}">
+                                            <div class="eye d-inline-block"><span class="eye-icon"><img width="24px"
+                                                        src="{{asset('Frontend/assets/images/product img/Eye 1.svg')}}" alt=""></span></div>
+                                        </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                                        </div>
+                            
+                    
+                    @empty
+                    <div class="col-lg-12 text-center">
+                        <h3>No Products Found</h3>
+                        @endforelse
+                   
                 </div>
             </div>
+           
+
         </section>
         <!---------THIRD SECTION ENDS HERE --------->
 
