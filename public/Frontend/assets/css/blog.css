@@ -1,0 +1,199 @@
+
+#blog .container
+{
+  padding: 0;
+}
+#blog #shopFilter .container{
+  padding: 0 12px;
+}
+#blog #shopFilter .left-content {
+  scrollbar-width: none;
+}
+#blog #leftContent .blog-search{
+ position: relative;
+ margin-bottom: 28px;
+}
+#blog #leftContent .blog-search i{
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  color: var(--gray-scale-gray-–-900);
+}
+#blog #leftContent .blog-search input{
+  width: 100%;
+  padding: 14px 16px 14px 44px;
+  border: 1px solid var(--gray-scale-gray-–-100);
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-900);
+}
+#blog #latestNews {
+  padding: 0;
+  transform: translateY(0%);
+  margin-top: 24px;
+}
+#blog #latestNews .latestNewsBox {
+  margin: 24px 0;
+  /* add 24px or 0 */
+  padding-top: 0;
+  padding-left: 0;
+  width: 424px;
+  height: 494px;
+  margin-top: 0px;
+  background: var(--gray-scale-white);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  border: 1px solid var(--gray-scale-gray-–-100);
+}
+#blog #latestNews .latestNewsBox h3 {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-900);
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+#blog #latestNews .latestNewsBox h3:hover{
+  color: var(--branding-success-dark);
+}
+#blog #latestNews .customRow {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+#blog #latestNews .latestNewsBox .childBox img {
+  width: 424px;
+  height: inherit;
+}
+#blog #latestNews .latestNewsBox .childBox {
+  width: 424px;
+}
+#blog #latestNews .latestNewsBox .childBox-text {
+  padding: 24px;
+}
+#blog #latestNews .latestNewsBox .childBox .text {
+  bottom: 20px;
+}
+#blog #latestNews .latestNewsBox .childBox .text h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+#blog #latestNews .latestNewsBox .childBox-text .blog-link {
+  display: flex;
+  align-items: center;
+  gap: 6.36px;
+}
+#blog #latestNews .latestNewsBox .childBox-text .blog-link p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-700);
+}
+#blog #latestNews .latestNewsBox .childBox-text .blog-link i {
+  stroke-width: 1.2px;
+  color: var(--gray-scale-gray-–-300);
+}
+
+
+#blog #latestNews .latestNewsBox .childBox .veno-parent{
+  position: relative;
+  
+}
+#blog #latestNews .latestNewsBox .childBox .veno-parent i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 15px;
+  height: 18.5px;
+  padding: 22px;
+  background-color: var(--gray-scale-white);
+  color: var(--branding-success-dark);
+  border-radius: 50px;
+  transform: translateX(-50%) translateY(-50%);
+  pointer-events: none;
+}
+#blog #shopFilter hr{
+  border: 1px solid var(--gray-scale-gray-–-100);
+  width: 424px;
+  height: 1px;
+
+}
+#blog #shopFilter #leftContent .faq .faqBody .faqCnt .form-check {
+  display: flex;
+  min-height: 1.5rem;
+  padding-left: 0;
+  margin-bottom: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+#blog #shopFilter #leftContent .faq .faqBody .faqCnt .form-check a{
+  text-align: start;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-900);
+}
+#blog #shopFilter #leftContent .faq .faqBody .faqCnt .form-check a:hover{
+  color: var(--branding-success-dark);
+}
+#blog #shopFilter #leftContent .faq .faqBody .faqCnt .form-check p{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-500);
+}
+#blog #shopFilter #leftContent .tag .faqCnt ul li:hover{
+  background-color: var(--branding-success);
+  color: var(--gray-scale-white);
+}
+#blog #shopFilter #leftContent .faq .faqHeader h3,
+#blog #shopFilter #leftContent .tag .faqHeader h3{
+  cursor: pointer;
+}
+/* #blog #shopFilter #leftContent .tag .faqCnt ul li a:hover{
+  background-color: var(--branding-success);
+  color: var(--gray-scale-white);
+} */
+ #blog .saleProduct h3,
+#blog .shopBanner h3{
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-900);
+  margin-bottom: 20px;
+}
+ #blog .shopBanner a img{
+  width: 98px;
+  height: 100px;
+ }
+ #blog .saleProduct .saleCard img{
+  width: 100px;
+  max-height: 77px;
+  margin: auto;
+ }
+ #blog .saleProduct .saleCard .card-title{
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-900);
+ }
+ #blog .saleProduct .saleCard .card-body p{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-600);
+ }
+
+
+ /* *For Mobile */
+ @media only screen and (max-width: 768px) {
+  #blog #shopFilter .container {
+    padding: 0px 0px;
+}
+ }

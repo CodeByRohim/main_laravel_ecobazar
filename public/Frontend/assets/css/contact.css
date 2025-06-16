@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+:root {
+	--gren-gray-scale-900: #002603;
+	--gren-gray-scale-800: #173b1a;
+	--gren-gray-scale-700: #2b572e;
+	--gren-gray-scale-600: #406b42;
+	--gren-gray-scale-500: #618062;
+	--gren-gray-scale-400: #7a997c;
+	--gren-gray-scale-300: #96b297;
+	--gren-gray-scale-200: #b4ccb4;
+	--gren-gray-scale-100: #dae5da;
+	--gren-gray-scale-50: #edf2ee;
+	--gray-scale-gray-–-900: #1a1a1a;
+	--gray-scale-gray-–-800: #333;
+	--gray-scale-gray-–-700: #4d4d4d;
+	--gray-scale-gray-–-600: #666;
+	--gray-scale-gray-–-500: #808080;
+	--gray-scale-gray-–-400: #999;
+	--gray-scale-gray-–-300: #b3b3b3;
+	--gray-scale-gray-–-200: #ccc;
+	--gray-scale-gray-–-100: #e6e6e6;
+	--gray-scale-gray-–-50: #f2f2f2;
+	--gray-scale-white: #fff;
+	--branding-success-bright: #84d187;
+	--branding-success: #00b207;
+	--branding-success-dark: #2c742f;
+	--branding-warning: #ff8a00;
+	--branding-error: #ea4b48;
+}
+:root {
+  --font-family: "Poppins", sans-serif;
+  --second-family: "Segoe Script", sans-serif;
+  --third-family: "Dancing Script", sans-serif;
+  --bannerHeight: 640px;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul,ol{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+h1,h2,h3,h4,h5,h6,ul,p,span,ol,li{
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: var(--font-family);
+}
+
+
+::-webkit-scrollbar {
+  width: 7px;
+  background: var(--gray-scale-white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--branding-success);
+  border-radius: 50px;
+}
+
+/* *Breadcrumbs Start Here */
+#Breadcrumbs {
+  background-image: url(../images/Breadcrumbs\(1\).png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+}
+
+#Breadcrumbs ul {
+  display: flex;
+  align-items: center;
+}
+
+#Breadcrumbs ul li {
+  display: flex;
+  align-items: center;
+}
+
+#Breadcrumbs ul li .homeIcom {
+  line-height: 10px;
+}
+
+#Breadcrumbs ul li a {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-400);
+  margin: 0 6px;
+  transition: 0.3s;
+}
+
+#Breadcrumbs ul li .active,
+#Breadcrumbs ul li a:hover,
+#Breadcrumbs ul li a:focus {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--branding-success);
+  line-height: 10px !important;
+}
+
+/* *Breadcrumbs End Here */
+
+
+/* *Details  START HERE */
+#details {
+  margin: 80px auto;
+}
+#details .f-row{
+  justify-content: center;
+  gap: 24px;
+}
+#details .leftSide {
+  box-shadow: 0 0 56px 0 rgba(0, 38, 3, 0.08);
+  background: var(--gray-scale-white);
+  border-radius: 8px;
+  padding: 0px 20px;
+  width: 312px;
+  height: 507px;
+}
+
+#details .cntBox {
+  border-radius: 10px;
+  padding: 24px 0px;
+  max-width: 272px;
+  height: 169px;
+  border-bottom: 1px solid var(--gray-scale-gray-–-100);
+}
+
+#details .cntBox iconify-icon {
+  margin-top: 24px;
+}
+
+#details .cntBox p {
+  margin: 16px 0 24px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  color: var(--gray-scale-gray-–-800);
+}
+#details .rightSide{
+  max-width: 984px;
+  height: 507px;
+}
+#details .formCnt {
+  border-radius: 8px;
+  max-width: 984px;
+  height: 507px;
+  box-shadow: 0 0 56px 0 rgba(0, 38, 3, 0.08);
+  background: var(--gray-scale-white);
+}
+
+#details .formCnt .formd {
+  margin-left: 50px;
+}
+
+#details .formCnt h4 {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--gray-scale-gray-–-900);
+  padding-top: 44px;
+}
+#details .formCnt p {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--gray-scale-gray-–-500);
+  margin: 8px 0 24px;
+  width: 486px;
+}
+
+#details .formCnt .d-flex input {
+  border: 1px solid var(--gray-scale-gray-–-100);
+  border-radius: 6px;
+  padding: 14px 16px;
+  width: 434px;
+  height: 49px;
+  background: var(--gray-scale-white);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 49px;
+  color: var(--gray-scale-gray-–-600);
+  outline: var(--branding-success);
+  margin-right: 16px;
+}
+
+#details .formCnt .sub {
+  outline: var(--branding-success);
+  border: 1px solid var(--gray-scale-gray-–-100);
+  border-radius: 6px;
+  padding: 14px 16px;
+  width: 790px;
+  height: 49px;
+  background: var(--gray-scale-white);
+  margin: 16px 0;
+}
+
+#details .formCnt textarea {
+  border: 1px solid var(--gray-scale-gray-–-100);
+  border-radius: 6px;
+  padding: 14px 16px;
+  width: 790px;
+  height: 98px;
+  background: var(--gray-scale-white);
+  outline: var(--branding-success);
+  margin-bottom: 24px;
+}
+
+#details .formCnt button {
+  border-radius: 43px;
+  padding: 16px 40px;
+  width: 199px;
+  height: 51px;
+  background: var(--branding-success);
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--gray-scale-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+}
+/* *Details  ENDS HERE */
+
+/* *Map  START HERE */
+
+/* *Map  ENDS HERE */
+
+/* *Footer bottom End Hear */
+/* *Footer End Here */
+@media screen and (max-width: 992px) {
+  #Breadcrumbs {
+    height: 60px;
+}
+#details {
+  margin: 12px 0;
+}
+#details .f-row {
+  gap: 0px;
+}
+#details .leftSide {
+  width: 100%;
+  margin-bottom: 20px;
+}
+#details .cntBox {
+  padding: 15px 0px;
+   max-width: none; 
+}
+  #details .formCnt p {
+    padding: 0 5px;
+    text-align: center;
+    margin: 5px 0 15px;
+    width: 326px;
+}
+#details .formCnt h4 {
+  text-align: center;
+  padding-top: 35px;
+}
+#details .formCnt .d-flex input {
+  width: 95%;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+#details .formCnt button {
+  margin: auto;
+  padding: 12px 8px;
+  width: 130px !important;
+  height: 45px;
+}
+
+  #details .formCnt {
+    width: 100%;
+    margin-left: 0;
+    height: 475px;
+  }
+
+  #details .formCnt .formd {
+    margin-left: 0;
+  }
+
+  #details .formCnt .sub {
+    width: 100%;
+  }
+
+  #details .formCnt textarea {
+    width: 100%;
+  }
+
+  #details .formCnt button {
+    width: 100%;
+  }
+  /* Map start */
+  #map {
+    width: 100%;
+    height: 200px;
+  }
+  /* Map end */
+}
+

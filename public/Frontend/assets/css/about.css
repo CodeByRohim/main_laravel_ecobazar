@@ -1,0 +1,526 @@
+#about{
+  padding: 80px 0 80px 0;
+}
+#about .row{
+  align-items: center;
+}
+#about .first-text .aboutText h2{
+font-weight: 600;
+font-size: 54px;
+line-height: 120%;
+color: var(--gray-scale-gray-–-900);
+}
+
+#about .first-text .aboutText p{
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-600);
+  margin-top: 32px;
+}
+
+#about .first-img img{
+ width: 716px;
+ max-height: 492px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* second */
+#about2 .aboutSecond{
+  display: flex;
+  align-items: center;
+  background-image: url(../images/aboutmiddle.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-height: 685px;
+  height: 685px;
+}
+#about2 .aboutSecond .second-img .aboutImg img{
+  width: 745px;
+  height: 685px;
+}
+#about2 .aboutSecond .second-text{
+  display: flex;
+  align-items: center;
+}
+#about2 .aboutSecond .aboutText h2{
+  font-weight: 600;
+  font-size: 56px;
+  line-height: 120%;
+  color: var(--gren-gray-scale-900); 
+}
+#about2 .aboutSecond .aboutText p{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-500);
+  margin-top: 8px;
+}
+#about2 .aboutSecond .infoMiddle{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  /* margin-top: 24px; */
+}
+#about2 .aboutSecond .infoMiddle .leaf{
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+}
+#about2 .aboutSecond .infoMiddle .leaf img{
+  max-width: 72px;
+}
+#about2 .aboutSecond .infoMiddle .leaf h5{
+font-weight: 500;
+font-size: 18px;
+line-height: 150%;
+color: var(--gray-scale-gray-–-900);
+}
+#about2 .aboutSecond .infoMiddle .leaf p{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-400)
+}
+
+
+
+/* third */
+#about3{
+  padding: 80px 0 0 0;
+}
+#about3 .first-text .aboutText h2 span,
+#about3 .first-text .aboutText h2{
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 120%;
+  color: var(--gray-scale-gray-–-900);
+}
+#about3 .first-text .aboutText p{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-600);
+  margin-top: 24px;
+  margin-bottom: 20px;
+}
+#about3 .first-text .aboutText span{
+font-weight: 400;
+font-size: 14px;
+line-height: 140%;
+color: var(--gray-scale-gray-–-600);
+display: inline-table;
+padding: 8px 0;
+}
+#about3 .first-text .aboutText span i{
+  padding: 4px;
+  background-color: var(--branding-success);
+  color: var(--branding-success-dark);
+  border-radius: 100px;
+  margin-right: 8px;
+}
+#about3 .first-text .aboutText button{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 43px;
+  padding: 16px 40px;
+  border: none;
+  background: var(--branding-success);
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  color: var(--gray-scale-white);
+  margin-top: 24px;
+}
+#about3 .first-text .aboutText button:hover{
+  background: var(--branding-success-dark);
+}
+
+
+
+/* TEAM STYLES START */
+#team{
+  /* width: 1440px;/ */
+  position: relative;
+  padding: 80px 0 80PX 0;
+}
+#team #teamLeftBtn,
+#team #teamRightBtn{
+  border-radius: 100%;
+background: var(--gray-scale-white);
+border: 1px solid var(--gray-scale-gray-–-100);
+padding: 16px;
+position: absolute;
+  top: 55%;
+}
+#team #teamLeftBtn{
+  left: 50px;
+}
+#team #teamRightBtn{
+  right: 50px;
+}
+#team .teamWrapper h2{
+font-weight: 600;
+font-size: 48px;
+line-height: 120%;
+text-align: center;
+color: var(--gray-scale-gray-–-900);
+}
+#team .teamWrapper p{
+font-weight: 400;
+font-size: 16px;
+line-height: 150%;
+text-align: center;
+color: var(--gray-scale-gray-–-600);
+margin-bottom: 50px;
+}
+#team .teamWrapper .member{
+  display: flex;
+  gap: 24px;
+}
+#team .member .member-card{
+  position: relative;
+  border: 1px solid var(--gray-scale-gray-–-100);
+  border-radius: 8px;
+  width: 312px !important;
+  height: 368px;
+  background: var(--gray-scale-white);
+  overflow: hidden;
+}
+#team .member .slick-track{
+  display: flex !important;
+  gap: 24px !important;
+}
+#team .member .member-card:hover .overlay,
+#team .member .member-card:focus .overlay{
+  opacity: 1;
+}
+#team .member .member-card .overlay{
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  gap: 4px;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  opacity: 0;
+  transition: 0.5s;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#team .member .member-card .overlay span i{
+  padding: 11px;
+  font-size: 18px;
+  color: var(--gray-scale-white);
+}
+#team .member .member-card .overlay span i:hover,
+#team .member .member-card .overlay span i:focus{
+  background: var(--branding-success);
+  border-radius: 100px;
+}
+#team .member .member-card .name{
+  margin-top: 16px;
+  margin-left: 0 ;
+  text-align: start;
+  padding: 0 20px;
+}
+#team .member .member-card h5{
+font-weight: 500;
+font-size: 18px;
+line-height: 150%;
+color: var(--gray-scale-gray-–-900);
+}
+#team .member .member-card h6{
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-500);
+
+}
+/* TEAM STYLES END */
+/* TESTIMONIAL STYLES START */
+#testimonial{
+  position: relative;
+  padding: 100px 0 100px 0;
+  background-color: var(--gray-scale-gray-–-50);
+}
+#testimonial #testLeftBtn,
+#testimonial #testRightBtn{
+  border-radius: 100%;
+background: var(--gray-scale-white);
+border: 1px solid var(--gray-scale-gray-–-100);
+padding: 16px;
+position: absolute;
+  top: 0%;
+}
+#testimonial #testLeftBtn,
+#testimonial #testRightBtn:hover,
+#testimonial #testLeftBtn,
+#testimonial #testRightBtn:focus{
+  background: var(--branding-success);
+  color: var(--gray-scale-white);
+}
+#testimonial #testLeftBtn{
+  /* left: 0px; */
+  right: 20px;
+}
+#testimonial #testRightBtn{
+  right: 80px;
+}
+#testimonial .testCardParent{
+  display: flex;
+  gap: 24px;
+}
+#testimonial .testimonialWrapper{
+  position: relative;
+}
+#testimonial .testimonialWrapper h2{
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 120%;
+  text-align: center;
+  color: var(--gray-scale-gray-–-900);
+ margin-bottom: 50px;  
+}
+#testimonial .testCardParent .slick-track{
+  display: flex !important;
+  gap: 24px !important;
+}
+#testimonial .testCardParent .testCard{
+  /* position: relative; */
+  border-radius: 8px;
+  padding: 24px;
+  width: 424px;
+  height: 254px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.01);
+  background: var(--gray-scale-white);  
+  overflow: hidden;
+}
+#testimonial .testCardParent .testCard .coma{
+  max-width: 32px;
+  max-height: 26px;
+  text-align: start !important;
+  display: flex;
+  margin-bottom: 16px;
+}
+#testimonial .testCardParent .testCard .profile-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+}
+#testimonial .testCardParent .testCard .profile-name .pr img{
+  width: 55px;
+  height: 55px; 
+  gap: 8px;
+}
+#testimonial .testCardParent .testCard .profile-name h5{
+font-weight: 500;
+font-size: 16px;
+line-height: 150%;
+text-align: center;
+color: var(--gray-scale-gray-–-900);
+}
+#testimonial .testCardParent .testCard .profile-name h6{
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+text-align: center;
+color: var(--gray-scale-gray-–-400);
+
+}
+#testimonial .testCardParent .testCard p{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-700);
+  text-align: start;
+  margin-bottom: 16px;
+}
+#testimonial .testCardParent .testCard .star .orange{
+color: var(--branding-warning);
+}
+/* ABOUT LOGOS START */
+#aboutLogo{
+  padding: 80px 0 80px 0;
+  background-color: var(--gray-scale-white);
+}
+#aboutLogo .logos{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+#aboutLogo .logos span img:hover,
+#aboutLogo .logos span img:focus{
+  color: #D8259B;
+  /* filter: brightness(0); */
+  fill:"#D8259B";
+  stroke: #D8259B;
+}
+
+/* ABOUT LOGOS END */
+
+/* TESTIMONIAL STYLES END*/
+@media (max-width: 778px) {
+  #about {
+    padding: 30px 0 28px 0;
+}
+#about2 .aboutSecond .aboutText h2,
+#about .first-text .aboutText h2 {
+  font-size: 28px;
+  margin-top: 12px;
+}
+#about .first-text .aboutText p {
+  font-size: 14px;
+  margin-top: 12px;
+}
+  #about .first-img img{
+    width: 100%;
+    max-height: 100%;
+  }
+
+  #about2 .aboutSecond .aboutText p{
+    font-size: 14px;
+  }
+  #about2 .aboutSecond .infoMiddle .leaf {
+    margin-top: 16px;
+}
+  #about2 .aboutSecond .second-img .aboutImg img{
+    width: 100%;
+    height: 100%;
+  }
+  #about2 .aboutSecond .infoMiddle .leaf img{
+    max-width: 42px;
+  }
+  #about2 .aboutSecond .infoMiddle .leaf h5{
+    font-size: 16px;
+  }
+  #about2 .aboutSecond .infoMiddle .leaf p{
+    font-size: 14px;
+  }
+ #about2 .aboutSecond {
+    background-image: none;
+    max-height: 100%; 
+    height: 100%; 
+}
+#about2 .aboutSecond .aboutImg{
+  background-image: url(../images/aboutmiddle.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#about2 .aboutSecond .infoMiddle .leaf {
+  gap: 8px;
+  margin-top: 0;
+}
+ #about3 .first-text .aboutText h2 {
+  font-size: 28px;
+  margin-top: 12px;
+}
+#about3 .first-text .aboutText h2 span{
+  font-size: 28px;
+}
+#about3 .first-text .aboutText p {
+  font-size: 14px;
+  margin-top: 12px;
+  margin-bottom: 14px;
+}
+#about3 .first-text .aboutText button {
+  gap: 8px;
+  padding: 14px 28px;
+  font-size: 14px;
+  margin-top: 20px;
+}
+/* TEAM START HERE */
+#team {
+  padding: 30px 0 30PX 0;
+}
+#team .teamWrapper h2 {
+  font-size: 28px;
+}
+#team .teamWrapper p {
+  margin-top: 12px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+#team #teamLeftBtn, #team #teamRightBtn {
+  padding: 5px;
+}
+#team #teamRightBtn {
+  right: 30px;
+}
+#team #teamLeftBtn {
+  left: 48px;
+}
+#team .teamWrapper .member {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+#team .member .member-card {
+  width: 100%;
+}
+/* testmonial start here */
+#testimonial {
+  padding: 32px 0 32px 0;
+}
+#testimonial .testimonialWrapper h2 {
+  font-size: 28px;
+  margin-bottom: 35px;
+}
+#testimonial #testLeftBtn {
+  right: 10px;
+}
+#testimonial #testRightBtn {
+  right: 48px;
+}
+#testimonial #testLeftBtn, #testimonial #testRightBtn {
+  padding: 8px;
+}
+#testimonial .testCardParent .testCard p {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+#testimonial .testCardParent .testCard .profile-name h5 {
+  font-size: 15px
+}
+#testimonial .testCardParent .testCard .profile-name .star{
+  font-size: 12px;
+}
+
+/* logo start */
+#aboutLogo {
+  padding: 32px 0 32px 0;
+}
+#aboutLogo .logos {
+  margin: 0px 35px;
+}
+#aboutLogo .logos span{
+  margin: 8px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

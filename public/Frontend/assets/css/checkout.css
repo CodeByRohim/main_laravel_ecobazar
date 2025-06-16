@@ -1,0 +1,262 @@
+#BillingInfo{
+  padding: 32px 0 80px 0;
+}
+#BillingInfo .bill{
+  padding-left: 0;
+  padding-right: 0;
+}
+#BillingInfo h2{
+  font-family: var(--font-family);
+font-weight: 500;
+font-size: 24px;
+line-height: 150%;
+color: var(--gray-scale-gray-–-900);
+
+}
+#BillingInfo .left{
+  max-width: 872px;
+}
+#BillingInfo .email-phone,
+#BillingInfo .country-status-zip,
+#BillingInfo .first-last-com-wrap{
+  display: flex;
+  justify-content: space-between;
+}
+#BillingInfo .formGroup{
+  margin-top: 24px;
+}
+#BillingInfo .formGroup label{
+  margin-bottom: 8px;
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-900);
+}
+
+#BillingInfo .formGroup input{
+border: 1px solid var(--gray-scale-gray-–-100);
+border-radius: 6px;
+padding: 14px 16px;
+width: 280px;
+/* width: 100%; */
+height: 49px;
+background: var(--gray-scale-white);
+outline: none;
+}
+#BillingInfo .formGroup input::placeholder{
+font-weight: 400;
+font-size: 16px;
+line-height: 130%;
+color: var(--gray-scale-gray-–-400);
+
+}
+#BillingInfo .formGroup input:hover,
+#BillingInfo .formGroup input:focus{
+  outline: 1px solid var(--branding-success);
+
+}
+#BillingInfo .formGroup #address{
+  max-width: 872px;
+  width: 100%;
+}
+
+#BillingInfo .email-phone input{
+  width: 100%;
+  width: 428px;
+}
+#BillingInfo .country-status-zip select {
+  width: 280px;
+  height: 49px;
+  box-shadow: none;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: var(--gray-scale-gray-–-400);
+
+}
+
+#BillingInfo .form-check{
+  margin: 20px 0 32px 0;
+}
+
+#BillingInfo .form-check label{
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+color: var(--gray-scale-gray-–-700);
+
+}
+#BillingInfo .add label{
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+color: var(--gray-scale-gray-–-900);
+}
+#BillingInfo .add textarea{
+  border: 1px solid var(--gray-scale-gray-–-100);
+border-radius: 6px;
+padding: 14px 16px;
+width: 872px;
+height: 100px;
+width: 100%;
+}
+#BillingInfo .add textarea::placeholder{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: var(--gray-scale-gray-–-400);
+}
+
+/* right side */
+#BillingInfo .right{
+  max-width: 424px;
+ width: 100%;
+  border: 1px solid var(--gray-scale-gray-–-100);
+  border-radius: 8px;
+  background: var(--gray-scale-white);
+  padding: 14px;
+}
+#BillingInfo .right .card{
+  border: none;
+  padding: 0;
+}
+#BillingInfo .right .card .card-header{
+  background-color: transparent;
+  border-bottom: none;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-900);
+  /* margin: 24px 0 0 0; */
+  
+}
+#BillingInfo .right .card .checkout{
+  /* width: 100%; */
+  margin: 20px 10px;
+  border-radius: 43px;
+  padding: 16px 40px;
+  height: 50px;
+  background: var(--branding-success);
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  color: var(--gray-scale-white);
+  border: none; 
+  text-align: center;
+}
+#BillingInfo .right .card .br{
+  border: none;
+  position: relative;
+}
+#BillingInfo .right .card .br:after{
+  content: "";
+  position: absolute;
+  border-bottom: 1px solid var(--gray-scale-gray-–-100);
+  left: 50%;
+  height: 1px;
+  bottom: 0;
+  width: 376px;
+  transform: translateX(-50%);
+}
+#BillingInfo .right .card li::after {
+  border-bottom: none; 
+}
+#BillingInfo .right .card li{
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+color: var(--gray-scale-gray-–-700);
+}
+#BillingInfo .right .card li span{
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  color: var(--gray-scale-gray-–-900); 
+}
+#BillingInfo .right .card .checkout:focus,
+#BillingInfo .right .card .checkout:hover{
+  background: var(--branding-success-dark);
+  transition: .3s ease-in-out;
+}
+
+
+#BillingInfo .productSum .productImg{
+  display: flex;
+ align-items: center;
+}
+#BillingInfo .productSum .productImg img{
+  max-width: 60PX;
+  /* height: 100%; */
+  object-fit: cover;
+  border-radius: 8px;
+}
+#BillingInfo .productSum .productImg h4{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-900);
+}
+#BillingInfo .productSum .productText p{
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--gray-scale-gray-–-900);  
+}
+
+#BillingInfo .payment .form-check{
+  margin: 0px 0 10px 0;
+}
+#BillingInfo .payment .form-check-input:checked{
+  background: var(--branding-success);
+}
+#BillingInfo .payment .form-check-input:checked{
+  margin-right: 6px;
+  box-shadow: none;
+  position: relative;
+  background-color: var(--branding-success);
+}
+#BillingInfo .payment .form-check-input:checked::after{
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  width: 24px;
+  top: -5px;
+  left: -5px;
+  height: 24px;
+  border: 1.50px solid var(--branding-success);
+  
+}
+@media (max-width: 768px){
+  #BillingInfo {
+    padding: 32px 0 32px 0;
+}
+  #BillingInfo .bill{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  #BillingInfo .right .card .br:after {
+    width: 100%;
+  }
+  #BillingInfo .left{
+    max-width: 100%;
+  }
+  #BillingInfo .email-phone input{
+    width: 100%;
+  }
+  #BillingInfo .country-status-zip select {
+    width: 100%;
+  }
+  #BillingInfo .formGroup input{
+    width: 100%;
+  }
+  #BillingInfo .add textarea{
+    width: 100%;
+  }
+  #BillingInfo .email-phone, #BillingInfo .country-status-zip, #BillingInfo .first-last-com-wrap {
+    flex-direction: column;
+}
+}
