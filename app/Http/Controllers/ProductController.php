@@ -172,11 +172,24 @@ class ProductController extends Controller
     {
         $search = $request->input('search');
         $categories = Category::query()->where('status',true)->select('id', 'title');
+        // $products = Product::query()->where('status',true)->select('id','title');
         if($search) {
             $categories = $categories->whereLike('title', "%$search%");
+            // $products = $products->whereLike('title', "%$search%");
         } 
         $categories = $categories->limit(3)->get();
+        // $products = $products->latest()->get();
         $resArray = [];
+        // if($resArray){
+        //     $resArray['categories'] = $categories;
+        //     $resArray['products'] = $products;
+        // }
+        // foreach ($products as $product) {
+        //     $resArray[] = [
+        //         'id' => $product->id,
+        //         'text' => $product->title,
+        //     ];
+        // }
         foreach ($categories as $category) {
             $resArray[] = [
                 'id' => $category->id,
@@ -186,6 +199,8 @@ class ProductController extends Controller
       
         return response()->json($resArray);
     }
+
+
     public function liveBrand(Request $request)
 {
     $search = $request->input('search');

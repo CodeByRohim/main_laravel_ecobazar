@@ -1,8 +1,12 @@
 @extends('layouts.BackendLayout')
 @section('CustomerMessage')
 @section('title','Customer Message')
+              <div class="mx-4 my-3">
+                <h3>Customer Contact</h3>
+              </div>
                         <div class="feedback p-3 d-flex justify-content-between">
-                            <div class="col-12 col-lg-7">     
+                          
+                            <div class="col-12 col-lg-7 mx-1">     
                             
                                 <!-- Review Card -->
                                 @foreach($messages as $message)

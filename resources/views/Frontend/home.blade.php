@@ -11,10 +11,12 @@
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="bannerImg col-lg-6">
-                                <img class=" img-fluid" src="{{asset('storage/' .$banner->banner_image)}}" alt="{{$banner->title}}">
+                                <img class="w-100" src="{{asset('storage/' .$banner->banner_image)}}" alt="{{$banner->title}}">
+                               @if($banner->discount)
                                 <div class="circle">
                                     <p>{{ $banner->discount}}<span>OFF</span></p>
                                 </div>
+                                @endif
                             </div>
                             <div class="col-lg-6 banner-text">
                                 <span class="shopery">Welcome to shopery</span>
@@ -30,69 +32,7 @@
                     </div>
                 </div>
                 @endforeach
-                {{-- <div class="slide">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="bannerImg col-lg-6">
-                                <img class=" img-fluid" src="{{asset('Frontend/assets/images/Image-removebg-preview.png')}}" alt="">
-                                <div class="circle">
-                                    <p>70% <span>OFF</span></p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 banner-text">
-                                <span class="shopery">Welcome to shopery</span>
-                                <h3>Fresh & Healthy
-                                    Organic Food</h3>
-                                <p>Free shipping on all your order. we deliver, you enjoy</p>
-                                <button class="customBtn shopBtn d-flex gap-2">Shop Now <span class="rightArrow"><i
-                                            class="bi bi-arrow-right-short"></i></span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-
-                {{-- <div class="slide">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="bannerImg col-lg-6">
-                                <img class="img-fluid" src="{{asset('Frontend/assets/images/Image-removebg-preview.png')}}" alt="">
-                                <div class="circle">
-                                    <p>70% <span>OFF</span></p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 banner-text">
-                                <span class="shopery">Welcome to shopery</span>
-                                <h3>Fresh & Healthy
-                                    Organic Food</h3>
-                                <p>Free shipping on all your order. we deliver, you enjoy</p>
-                                <button class="customBtn shopBtn d-flex gap-2">Shop Now <span class="rightArrow"><i
-                                            class="bi bi-arrow-right-short"></i></span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-
-                {{-- <div class="slide">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="bannerImg col-lg-6">
-                                <img class=" img-fluid" src="{{asset('Frontend/assets/images/Image-removebg-preview.png')}}" alt="">
-                                <div class="circle">
-                                    <p>70% <span>OFF</span></p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 banner-text">
-                                <span class="shopery">Welcome to shopery</span>
-                                <h3>Fresh & Healthy
-                                    Organic Food</h3>
-                                <p>Free shipping on all your order. we deliver, you enjoy</p>
-                                <button class="customBtn shopBtn d-flex gap-2">Shop Now <span class="rightArrow"><i
-                                            class="bi bi-arrow-right-short"></i></span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-
+               
             </div>
             <button class="iconify-icon arrows leftArrows " id="bannerLeftArrow"><iconify-icon
                     icon="pepicons-pencil:arrow-left" width="20" height="20"></iconify-icon></button>
@@ -171,12 +111,14 @@
                     @endphp
                         <div class="productCard col-lg-3 mix {{ $product->category->slug}}">                   
                             
-                                <img class="img-fluid" style="max-height:310px;" src="{{ getProductImage($product) }}" alt="{{ $product->title }}">
+                                <div class="introduceImg">
+                                    <img class="img-flui" src="{{ getProductImage($product) }}" alt="{{ $product->title }}">
+                                </div>
                                 <div class="product-text d-flex align-items-center justify-content-between">
                                    <a href="{{$url}}">
                                     <div class="cnt">
                                         <h3>{{$product->title}}</h3>
-                                        <h2>${{$product->selling_price}} <span>${{$product->price}}</span></h2>
+                                        <h2>TK.{{$product->selling_price}} <span>TK.{{$product->price}}</span></h2>
                                         <span class="groupStar">
                                             <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
                                             <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
@@ -186,7 +128,7 @@
                                         </span>
                                     </div>
                                     </a>
-                                    <a href="{{route('addToCart', $product->id)}}" id="addToCartBtn">
+                                    <a href="{{route('addToCart', $product->id)}}" class="addToCartBtn">
                                         <span
                                             x-data="{ hover: false }"
                                             x-on:mouseenter="hover = true"
@@ -195,7 +137,7 @@
                                             :class="{ 'newBag': hover }"
                                             
                                         >
-                                            <img
+                                            <img style="max-width: 22px"
                                                 class="img"
                                                 :src="hover
                                                     ? '{{ asset('Frontend/assets/images/product img/Rectangle.svg') }}'
@@ -206,7 +148,16 @@
                                     </a>
                                 <div class="overlay">
                                     <div class="sale">
-                                        <div class=""><span> <p class="text-start">Sale 50%</p> </span></div>
+                                       
+                                        @if($product && $product->price > 0)
+                                            @php
+                                                $discount = (($product->price - $product->selling_price) / $product->price) * 100;
+                                            @endphp
+                                            <div class=""><span> <p class="text-start text-danger text-white fw-bold">{{ round($discount, 2) }}% OFF</p></span></div>
+                                        @else
+                                            <div class=""><span> <p class="text-start bg-black text-white fw-bold">No discount</p></span></div>
+                                        @endif
+
                                         <div class="heartAndeye">
                                             <div class="heart"><span class="heart-icon"><img width="24px" src="{{asset('Frontend/assets/images/Heart(1).svg')}}" alt=""></span></div>
                                 
@@ -231,121 +182,64 @@
         </section>
         <!---------THIRD SECTION ENDS HERE --------->
 
-        <!--------- DRINK  SECTION STARTS HERE --------->
-        <section id="drink">
-            <div class="container d-none d-lg-block">
-                <div class="d-flex align-items-center justify-content-center gap-4 cnt">
-
-                    <div class="col-lg-4 milk img-fluid">
-                        <div class="milk-breakfast">
-                            <h3>100% Fresh
-                                <span class="d-block">Cow Milk</span>
-                            </h3>
-                            <p>Starting at <span>$14.99</span></p>
-                            <button class="customBtn drinkBtn">Shop Now <span class="rightArrow"><i
-                                        class="bi bi-arrow-right-short"></i></span></button>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 water img-fluid">
-                        <div class="wrapper">
-                            <p class="">Drink Sale</p>
-                            <h3 class="">Water &<span class="d-block">Soft Drink</span></h3>
-                            <button class="customBtn drinkBtn  justify-content-lg-end">Shop Now <span
-                                    class="rightArrow"><i class="bi bi-arrow-right-short"></i></span></button>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 breakfast img-fluid">
-                        <div class="milk-breakfast">
-                            <p>100% Organic</p>
-                            <h3>100% Fresh
-                                <span class="d-block">Cow Milk</span>
-                            </h3>
-                            <button class="customBtn drinkBtn">Shop Now <span class="rightArrow"><i
-                                        class="bi bi-arrow-right-short"></i></span></button>
-                        </div>
-                    </div>
-                </div>
+        <!--------- DRINK SECTION STARTS HERE --------->
+    <section id="drink">
+    <div class="container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
             </div>
-        </section>
-        <!--------- SM DRINK SECTION STARTS HERE --------->
-        <div class="d-lg-none">
-            <section id="drink">
-                <div class="container d-lg-none">
-                    <div id="carouselExampleIndicators " class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators ">
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                                class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                                aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                                aria-label="Slide 3"></button>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-4">
+                            <a href=""><img class="img-fluid" src="{{asset('/Frontend/assets/drink-img/image(4).svg')}}" alt=""></a>
                         </div>
-                        <div class="d-flex align-items-center justify-content-center gap-4 cnt">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="col-lg-4 milk img-fluid ">
-                                        <div class="milk-breakfast ">
-                                            <h3>100% Fresh
-                                                <span class="d-block">Cow Milk</span>
-                                            </h3>
-                                            <p>Starting at <span>$14.99</span></p>
-                                            <a href="#">
-                                                <button class="customBtn drinkBtn">Shop Now <span class="rightArrow"><i
-                                                            class="bi bi-arrow-right-short"></i></span></button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <div class="col-lg-4 water img-fluid">
-                                        <div class="wrapper">
-                                            <p class="">Drink Sale</p>
-                                            <h3 class="">Water &<span class="d-block">Soft Drink</span></h3>
-                                            <a href="#">
-                                                <button class="customBtn drinkBtn  justify-content-lg-end">Shop Now
-                                                    <span class="rightArrow"><i
-                                                            class="bi bi-arrow-right-short"></i></span></button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <div class="col-lg-4 breakfast img-fluid">
-                                        <div class="milk-breakfast">
-                                            <p>100% Organic</p>
-                                            <h3>100% Fresh
-                                                <span class="d-block">Cow Milk</span>
-                                            </h3>
-                                            <a href="#">
-                                                <button class="customBtn drinkBtn">Shop Now <span class="rightArrow"><i
-                                                            class="bi bi-arrow-right-short"></i></span></button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
+                        <div class="col-sm-12 col-lg-4 d-none d-lg-block">
+                            <a href=""><img class="img-fluid" src="{{asset('/Frontend/assets/drink-img/image(5).svg')}}" alt=""></a>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-ico" aria-hidden="true"><i
-                                    class="fa-solid fa-arrow-left"></i></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-ico" aria-hidden="true"><i
-                                    class="fa-solid fa-arrow-right"></i></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+                        <div class="col-sm-12 col-lg-4 d-none d-lg-block">
+                            <a href=""><img class="img-fluid" src="{{asset('/Frontend/assets/drink-img/image(6).svg')}}" alt=""></a>
+                        </div>
                     </div>
                 </div>
-            </section>
+                <!-- Second Slide -->
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-4">
+                            <a href=""><img class="img-fluid" src="{{asset('/Frontend/assets/drink-img/image(6).svg')}}" alt=""></a>
+                        </div>
+                        <div class="col-sm-12 col-lg-4 d-none d-lg-block">
+                            <a href=""><img class="img-fluid" src="{{asset('/Frontend/assets/drink-img/image(5).svg')}}" alt=""></a>
+                        </div>
+                        <div class="col-sm-12 col-lg-4 d-none d-lg-block">
+                            <a href=""><img class="img-fluid" src="{{asset('/Frontend/assets/drink-img/image(4).svg')}}" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more slides as needed -->
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
         </div>
-        <!--------- SM DRINK SECTION ENDS HERE --------->
+    </div>
+</section>
+
         <!--------- DRINK SECTION ENDS HERE --------->
+      
         <!--------- SPECIAL DEALS START HERE --------->
         <section id="specialDeals">
             <div class="d-flex align-items-center justify-content-center">
@@ -400,13 +294,72 @@
                         <h3 class="text-center">Featured Products</h3>
                     </div>
 
-                    <div class="row">
+            <div class="row">
 
+                 @forelse($products as $product)
+                    @php
+                    $url =  route('frontend.single_product', $product->slug);
+                    @endphp
+                        <div class="productCard col-lg-3 mix {{ $product->category->slug}}">                   
+                            
+                                <div class="featuredImg"><img class="img-fluid" src="{{ getProductImage($product) }}" alt="{{ $product->title }}"></div>
+                                <div class="product-text d-flex align-items-center justify-content-between">
+                                   <a href="{{$url}}">
+                                    <div class="cnt">
+                                        <h3>{{$product->title}}</h3>
+                                        <h2>${{$product->selling_price}} <span>${{$product->price}}</span></h2>
+                                        <span class="groupStar">
+                                            <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
+                                            <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
+                                            <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
+                                            <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd orange"></i>
+                                            <i class="fa-sharp-duotone fa-solid fa-star fa-star-chekd"></i>
+                                        </span>
+                                    </div>
+                                    </a>
+                                    <a href="{{route('addToCart', $product->id)}}" class="addToCartBtn">
+                                        <span
+                                            x-data="{ hover: false }"
+                                            x-on:mouseenter="hover = true"
+                                            x-on:mouseleave="hover = false"
+                                            class="bagOverlayCss"
+                                            :class="{ 'newBag': hover }"
+                                            
+                                        >
+                                            <img style="max-width: 22px"
+                                                class="img"
+                                                :src="hover
+                                                    ? '{{ asset('Frontend/assets/images/product img/Rectangle.svg') }}'
+                                                    : '{{ asset('Frontend/assets/images/Rectangle.svg') }}'"
+                                                alt="Bag"
+                                            >
+                                        </span>
+                                    </a>
+                                <div class="overlay">
+                                    <div class="sale">
+                                        <div class=""><span> <p class="text-start">Sale 50%</p> </span></div>
+                                        <div class="heartAndeye">
+                                            <div class="heart"><span class="heart-icon"><img width="24px" src="{{asset('Frontend/assets/images/Heart(1).svg')}}" alt=""></span></div>
+                                
+                                        <a href="{{$url}}">
+                                            <div class="eye d-inline-block"><span class="eye-icon"><img width="24px"
+                                                        src="{{asset('Frontend/assets/images/product img/Eye 1.svg')}}" alt=""></span></div>
+                                        </a>
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                            
+                    @empty
+                    <div class="col-lg-12 text-center">
+                        <h3>No Products Found</h3>
+                        @endforelse    
                         <!-- product 1 start -->
-                        <div class="productCard col-lg-3 col-md-4 col-sm-6">
-                            <!-- <span class="product-img"> -->
+                        {{-- <div class="productCard col-lg-3 col-md-4 col-sm-6">
+                           
                             <img class="img-fluid" src="{{asset('Frontend/assets/images/green.svg')}}" alt="">
-                            <!-- </span> -->
+                            
                             <div class="product-text d-flex align-items-center justify-content-between">
                                 <div class="cnt">
                                     <h3>Green Apple</h3>
@@ -582,7 +535,7 @@
 
                             </div>
                         </div>
-                        <!-- product 5 end -->
+                        <!-- product 5 end --> --}}
 
                     </div>
                 </div>

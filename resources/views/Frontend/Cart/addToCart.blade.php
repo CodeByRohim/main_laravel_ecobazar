@@ -77,7 +77,7 @@
                 <div class="qty-wrapper">
                     <button type="button" class="decrement" >−</button>
                     
-                    <input type="number" class="qty-input" value="{{ $items->qty }}" data-id="{{ $items->id }}" readonly>
+                    <input type="number" class="qty-input" value="{{ $items->qty }}" data-id="{{ $items->id }}" >
                     
                     <button type="button" class="increment" >+</button>
                 </div>

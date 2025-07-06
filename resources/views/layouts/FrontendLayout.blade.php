@@ -26,6 +26,10 @@
     <link rel="stylesheet" href="{{asset('Frontend/assets/css/wishlist.css')}}">
     <link rel="stylesheet" href="{{asset('Frontend/assets/css/about.css')}}">
     <link rel="stylesheet" href="{{asset('Frontend/assets/css/blog.css')}}">
+    <link rel="stylesheet" href="{{asset('Frontend/assets/css/jquery.ez-plus.css')}}">
+    <link rel="stylesheet" href="{{asset('Frontend/assets/css/prism.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('Frontend/assets/css/style.css')}}"> --}}
+
     <link rel="stylesheet" href="{{asset('Frontend/assets/css/responsive.css')}}">
      <link rel="stylesheet" href="{{asset('Frontend/assets/css/newsletter and footer.css')}}">
      <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -69,7 +73,7 @@
                                 </form>
                             </li>
                             <li class="d-inline-block">
-                                <a href="{{route('login')}}">Sign In / Sign Up</a>
+                                <a href="{{route('customer.login')}}">Sign In / Sign Up</a>
                             </li>
                         </ul>
                     </div>
@@ -431,7 +435,7 @@
    @yield('addToCart')
    @yield('checkout')
    @yield('user-dashboard')
-
+   @yield('contentEmail')
      </main>
       <!-- NEWSLETTER SECTION START -->
 
@@ -574,6 +578,10 @@
     <script src="{{asset('Frontend/assets/js/venobox.min.js')}}"></script>
     <script src="{{asset('Frontend/assets/js/jquery.countdown.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{asset('Frontend/assets/js/jquery.ez-plus.js')}}"></script>
+    <script src="{{asset('Frontend/assets/js/prism.js')}}"></script>
+    <script src="{{asset('Frontend/assets/js/web.js')}}"></script>
+
     <script src="{{asset('Frontend/assets/js/app.js')}}"></script>
     <script>
         $(document).ready(function(){
@@ -741,7 +749,7 @@
 });
 
     // Add To Cart
-    $(document).on('click', '#addToCartBtn', function(e){
+    $(document).on('click', '.addToCartBtn', function(e){
         e.preventDefault();
         const url = $(this).attr('href');
         $.ajax({
@@ -766,6 +774,13 @@
         })
     });
    
+    // image zoom
+   $('.zoom_mw').ezPlus({
+    scrollZoom: true
+});
+
+
+
   </script> 
   @stack('scripts')
 </body>

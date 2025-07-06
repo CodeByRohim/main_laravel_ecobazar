@@ -32,11 +32,11 @@
                     <div class="slider-nav">
                         
                       <div class="product2">
-                       <img class="img-fluid" src="{{getImage($product->featured_image)}}" alt="{{$product->title}}" alt="{{$product->title}}">
+                       <img class="img-fluid zoom_mw" src="{{getImage($product->featured_image)}}" alt="{{$product->title}}" alt="{{$product->title}}">
                       </div>
                       @foreach($galleryImages as $gallery)
                       <div class="product2">
-                        <img class="img-fluid " src="{{getImage($gallery)}}" alt="{{$product->title}}">
+                        <img class="img-fluid zoom_mw" src="{{getImage($gallery)}}" alt="{{$product->title}}">
                       </div>
                       @endforeach
                      
@@ -46,11 +46,11 @@
                 <div class="for-cnt col-lg-9">
                     <div class="slider-for">
                       <div class="product1">
-                        <img class="img-fluid" src="{{getImage($product->featured_image)}}" alt="{{$product->title}}">
+                        <img  class="img-fluid zoom_mw"  src="{{getImage($product->featured_image)}}" alt="{{$product->title}}">
                       </div>
                       @foreach($galleryImages as $gallery)
                       <div class="product1">
-                        <img class="img-fluid " src="{{getImage($gallery)}}" alt="{{$product->title}}">
+                        <img class="img-fluid zoom_mw"  src="{{getImage($gallery)}}" alt="{{$product->title}}">
                       </div>
                       @endforeach
                      
@@ -71,18 +71,21 @@
                 <h6 class="">SKU: <span>{{$product->sku}}</span></h6>
               </span>
               <div class="price">
-                  @if($product->selling_price)
+                
                    @php
-                   $discount = ceil(100 - (100 / $product->price) * $product->selling_price);
-                    @endphp
+    $discount = null; // initialize
+    if ($product && $product->price > 0 && $product->selling_price < $product->price) {
+        $discount = ceil(100 - (100 / $product->price) * $product->selling_price);
+    }
+@endphp
                
-                  <h3>${{$product->price}}</h3>
-                  <span class="green"> ${{$product->selling_price}} Tk.</span>
+                  <h3>{{$product->price}}</h3>
+                  <span class="green"> {{$product->selling_price}} Tk.</span>
                   <span class="off">{{  $discount }} % Off</span>
-                  @else
-                  <h3>${{$product->price}} Tk.</h3>
                   
-                  @endif
+                  <h3>{{$product->price}} Tk.</h3>
+                  
+                  
               </div>
               <hr>
               <!-- brand name and social link  -->
@@ -119,13 +122,13 @@
                   <button>+</button>
                 </div>
                 <div class="cartAddBtn">
-                    <button>Add to Cart 
-                        <!-- <div class="cartIcon"> -->
-                        <span class="iconify-icon">
-                            <img width="34" height="26" src="{{asset('Frontend/assets/images/Rectangle.svg')}}" alt="">                            
-                            <span>
-                    <!-- </div> -->
-                </button>
+                    <a href="{{route('addToCart', $product->id)}}" class="addToCartBtn">
+                      <button>Add to Cart
+                          <span class="iconify-icon">
+                              <img width="34" height="26" src="{{asset('Frontend/assets/images/Rectangle.svg')}}" alt="">
+                              <span>
+                      </button>
+                    </a>
                 </div>
                 <a class="heart" href="#">
                     <span class="iconify-icon">

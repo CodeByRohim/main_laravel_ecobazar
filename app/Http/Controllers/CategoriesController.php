@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use function Laravel\Prompts\info;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ class CategoriesController extends Controller
         $editCategory = null;
         if ($id) {
             $editCategory = $categories->where('id', $id)->first();
-            // dd($editCategory);
+           
         }
     
         return view('Backend.Category.Categories', compact('categories', 'editCategory'));
@@ -41,6 +41,7 @@ class CategoriesController extends Controller
         $category->save();
         if($id){
             return redirect()->back()->with('success', 'Category updated successfully');
+           
         }
         return redirect()->back()->with('success', 'Category created successfully');
     }

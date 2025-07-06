@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('address')->nullable();
             $table->string('shipping_address')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

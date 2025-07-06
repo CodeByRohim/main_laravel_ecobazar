@@ -24,10 +24,10 @@ class BannerRequest extends FormRequest
     {
           
       $id = $this->id; 
-        return [
-            'title' => 'required|min:3',   
+        return [ 
+            'title' => "required|min:3|unique:banners,title,$id",
+            'banner_image' => $id ? 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048' : 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'discount' => 'nullable|string',
-            'banner_image' => 'required|mimes:png,jpg,jpeg,webp|max:3048',
             'decription' => 'nullable|string',
             'quick_link' => 'nullable|url',
 

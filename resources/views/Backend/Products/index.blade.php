@@ -9,7 +9,7 @@
 <!-- Menu update  -->
 <section id="menu" class="mt-5 m-2">
   <h3>Product Menu Section</h3>
-  <div class=" card shadow  mb-5 bg-white">
+  <div class=" card shadow  mb-5">
             <div class="card-body">
               <table id="productTable" class="table table-bordered" >
                 <thead class="thead-dark" >
@@ -29,66 +29,8 @@
                     <th>Additional Info</th>
                     <th>Video</th>
                     <th>Status</th>
-                    <th style="width: 100px;">Actions</th>
+                    <th>Actions</th>
                   </tr>
-                   {{-- @if($categories->isEmpty())
-                  <tr>
-                    <td colspan="13" class="text-center">No data found</td>
-                  </tr>
-                  @endif
-              @foreach($products as $index=>$product)
-              
-                  <tr class="text-center">
-                    <td  class=""> {{++$index}} </td>
-                    <td class="">{{ $product->title }} </td>
-                    <td class="">{{ $product->category->title }}</td>
-                    <td class="">{{$product->brand?->title ?? 'no brand'}}</td>
-                    <td class="">{{ $product->price}}</td>
-                    <td class="">{{ $product->selling_price}}</td>
-                    <td class="">{{ $product->qty}}</td>
-                    <td class="">{{ $product->alert_qty}}</td>
-                    <td class="">
-                        {{ strip_tags(Str::limit($product->short_detail, 25)) }}
-                        @if(strlen($product->short_detail) > 10)
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#shortDetailModal{{ $product->id }}">More</a>
-                        @endif
-                    </td>
-                          
-                    <td class="">
-                        {{ strip_tags(Str::limit($product->long_detail, 25)) }}
-                        @if(strlen($product->long_detail) > 10)
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#longDetailModal{{ $product->id }}">More</a>
-                        @endif
-                    </td>
-                    <td class="">
-                      @if($product->featured_image)
-                      <img class="img-fluid" width="50" height="50" src="{{ asset('storage/' . $product->featured_image) }}" alt="">
-                      @else
-                      <span class="text-danger">No Image</span>
-                      @endif
-                    </td>
-                    <td class="d-flex flex-wrap align-items-center">
-                      @if($product->gallery_image)
-                          @foreach(json_decode($product->gallery_image) as $gallery)
-                              <img class="img-fluid me-1" width="50" height="50" src="{{ asset('storage/' . $gallery) }}" alt="">
-                          @endforeach
-                      @else
-                         <span class="text-danger">No Image</span>
-                      @endif
-                    </td>
-                    <td>{{$product->additional_info}}</td>
-                    <td class="">{{$product->video}}</td>
-                    <td class="btn-group">
-                      {{-- Edit Button --}}
-                    {{--<a href="{{ route('products.create', $product->id) }}" class="btn btn-primary" 
-                  >Edit</a> 
-                                    
-                      <a href="{{ route('products.delete', $product->id) }}" class="btn btn-danger btnDelete" >Delete</a>
-
-                    </td>
-                  </tr>
-              @endforeach  --}}
-                
               </table>
             </div>
           </div>
@@ -187,7 +129,6 @@
                 </form>
           </div>
         </div> --}}
-         {{-- {{dd($products)}} --}}
 </section>
 @push('scripts')
 <script>
@@ -202,7 +143,7 @@ let table = new DataTable('#productTable', {
         { data: 'DT_RowIndex',orderable:false,sortable:false, searchable: false },
         { data: 'featured_image', orderable: false, searchable: false },
         { data: 'gallery_image', orderable: false, searchable: false },
-        { data: 'title', orderable: false },
+        { data: 'title', orderable: false, searchable: true },
         { data: 'category', orderable: false, searchable: true },
         { data: 'brand', orderable: false},      
         { data: 'price' },

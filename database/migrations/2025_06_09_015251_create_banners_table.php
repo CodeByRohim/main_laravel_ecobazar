@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('discount')->nullable();
             $table->string('quick_link')->nullable();
             $table->string('description')->nullable();
-            $table->string('banner_image');
+            $table->string('banner_image')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

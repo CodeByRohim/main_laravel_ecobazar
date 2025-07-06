@@ -538,6 +538,4 @@
             </div>
             <!-- / Content -->
 
-           
-  
   @endsection

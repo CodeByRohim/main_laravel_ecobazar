@@ -37,9 +37,10 @@
     <link rel="stylesheet" href="{{asset('Backend/assets/css/demo.css')}}" />
     <link rel="stylesheet" href="{{asset('Backend/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
     <link rel="stylesheet" href="{{asset('Backend/assets/vendor/libs/apex-charts/apex-charts.css')}}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.min.css">
     @stack('css')
-    @notifycss
+    {{-- @notifycss --}}
    <style>
     #laravel-notify {
       position: absolute;
@@ -85,54 +86,14 @@
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
-           <!-- customer message -->
-              <li class="menu-item {{request()->routeIs('customerMessage.*') ? 'active' : ''}}">
-                <a href="{{route('customerMessage.index')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Customer Message</div>
-              </a>
-            </li>
-            
-            <!-- Layouts -->
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div data-i18n="Layouts">Layouts</div>
-              </a>
-
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="layouts-without-menu.html" class="menu-link">
-                    <div data-i18n="Without menu">Without menu</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-without-navbar.html" class="menu-link">
-                    <div data-i18n="Without navbar">Without navbar</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-container.html" class="menu-link">
-                    <div data-i18n="Container">Container</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-fluid.html" class="menu-link">
-                    <div data-i18n="Fluid">Fluid</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-blank.html" class="menu-link">
-                    <div data-i18n="Blank">Blank</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
+          
+           
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Pages</span>
             </li>
-            
+            {{-- {{ dd(auth()->user()->getAllPermissions()->pluck('name')) }} --}}
+{{-- {{ dd() }} --}}
+
             {{-- <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
@@ -156,14 +117,47 @@
                 </li>
               </ul>
             </li>     --}}
-             <!-- Dashboard -->
+             <!-- customer message -->
+              <li class="menu-item {{request()->routeIs('customerMessage.*') ? 'active' : ''}}">
+                <a href="{{route('customerMessage.index')}}" class="menu-link">
+                <i class='menu-icon bx  bx-notification'  ></i> 
+                <div data-i18n="Analytics">Customer Message</div>
+              </a>
+            </li>
+             <!-- Banner -->
+             @can('banner-manage')
               <li class="menu-item {{request()->routeIs('banner.*') ? 'active' : ''}}">
               <a href="{{route('banner.index')}}" class="menu-link">
-                {{-- <i class='menu-icon bx bx-store'></i> --}}
-                <i class='bx  bx-home-alt-2'  ></i> 
+                <i class='menu-icon bx  bx-square'  ></i> 
                 <div data-i18n="Authentications">Manage Banner</div>
               </a>
             </li> 
+            @endcan
+
+
+            {{-- stock manegment --}}
+
+           <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+               
+              <i class=' menu-icon bx  bxs-store-alt' ></i>  
+            
+                <div data-i18n="Authentications" class="position-relative">Stock <span class="{{ $product->qty <= $product->alert_qty ? 'blinking-dot' : '' }}"></span></div>
+              </a>
+             <ul class="menu-sub">
+            
+          
+              <li class="menu-item {{ request()->routeIs('low.stock.index') ? 'active' : '' }}">
+                <a href="{{ route('low.stock.index') }}" class="menu-link" target="_blank">
+                  <div data-i18n="Basic">Low Stock </div>
+                </a>
+              </li>
+             
+             </ul>
+            </li> 
+           
+            {{-- category manegment --}}
+            @can('show-category')
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class='menu-icon bx bxs-category-alt'></i>
@@ -176,35 +170,89 @@
                   </a>
                 </li>              
               </ul>
-            </li>  
+            </li>
+            @endcan
+             
            
             {{-- brand manage --}}
-            <li class="menu-item {{request()->routeIs('brand.*') ? 'active' : ''}}">
+            @can('show-brand')
+           <li class="menu-item {{request()->routeIs('brand.*') ? 'active' : ''}}">
               <a href="{{route('brand.index')}}" class="menu-link">
                 <i class='menu-icon bx bx-store'></i>
                 <div data-i18n="Authentications">Manage Brands</div>
               </a>
             </li> 
+            @endcan
+         
+
+       {{-- @canany(['show-product','create-product']) --}}
+         
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class='menu-icon bx  bx-shopping-bag'></i>  
                 <div data-i18n="Authentications">Products</div>
               </a>
              <ul class="menu-sub">
-  <li class="menu-item {{ request()->routeIs('products.create') ? 'active' : '' }}">
-    <a href="{{ route('products.create') }}" class="menu-link" target="">
-      <div data-i18n="Basic">Add Product</div>
-    </a>
-  </li>
-
-  <li class="menu-item {{ request()->routeIs('products.index') ? 'active' : '' }}">
-    <a href="{{ route('products.index') }}" class="menu-link" target="_blank">
-      <div data-i18n="Basic">All Products</div>
-    </a>
-  </li>
-</ul>
-
+              @can('create-product')
+              <li class="menu-item {{ request()->routeIs('products.create') ? 'active' : '' }}">
+                <a href="{{ route('products.create') }}" class="menu-link" target="">
+                  <div data-i18n="Basic">Add Product</div>
+                </a>
+              </li>
+           @endcan
+           @can('show-product')
+              <li class="menu-item {{ request()->routeIs('products.index') ? 'active' : '' }}">
+                <a href="{{ route('products.index') }}" class="menu-link" target="_blank">
+                  <div data-i18n="Basic">All Products</div>
+                </a>
+              </li>
+              @endcan
+             </ul>
             </li> 
+ {{-- @endcanany --}}
+ 
+
+
+ 
+          {{-- user manage --}}
+          @can('users-manage')
+             <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class='menu-icon bx  bx-user-check'  ></i> 
+                <div data-i18n="Authentication">User Mangement</div>
+              </a>
+             <ul class="menu-sub">
+              <li class="menu-item {{ request()->routeIs('roleAndPermission.users') ? 'active' : '' }}">
+                <a href="{{ route('roleAndPermission.users') }}" class="menu-link" target="">
+                  <div data-i18n="Basic">Users</div>
+                </a>
+              </li>
+
+             <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <div data-i18n="Authentication">Role & Permissions</div>
+              </a>
+             <ul class="menu-sub">
+              <li class="menu-item {{ request()->routeIs('roleAndPermission.role') ? 'active' : '' }}">
+                <a href="{{ route('roleAndPermission.role') }}" class="menu-link" target="">
+                  <div data-i18n="Basic">Role</div>
+                </a>
+              </li>
+
+              <li class="menu-item {{request()->routeIs('permission') ? 'active' : ''}}">
+                      <a href="{{route('permission')}}" class="menu-link">
+                        <div data-i18n="Authentications">Permissions</div>
+                      </a>
+                </li> 
+             </ul>
+            </li> 
+           
+            </ul>
+            </li> 
+          @endcan
+            {{-- user manage end --}}
+
+
           </ul>
         </aside>
         <!-- / Menu -->
@@ -238,11 +286,16 @@
               </div>
               <!-- /Search -->
 
+
               <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <div class="mx-2">
+                  <button class="btn shadow w-25 d-flex justify-content-center" id="toggleDark">
+                <i class='bx  bx-moon bg-amber-200 text-danger'></i> 
+                </button></div>
                 <!-- Place this tag where you want the button to render. -->
                 <li class="nav-item lh-1 me-3">
-                 <p class="my-0">{{auth()->user()->name}}</p>
-                 <p class="mb-0 text-end">Admin</p>
+                 <p class="my-0">{{auth()->user()->name ?? ''}}</p>
+                 <p class="mb-0 text-end">{{auth()->user()->getRoleNames()->implode(', ')}}</p>
                 </li>
 
                 <!-- User -->
@@ -324,6 +377,10 @@
       @yield('AddProduct')  
       @yield('CustomerMessage')
       @yield('Banner')
+      @yield('users')
+
+      @yield('backend')
+      @yield('page403')
     </main>
  <!-- Footer -->
  <footer class="content-footer footer bg-footer-theme">
@@ -384,5 +441,23 @@
     <script src="https://cdn.datatables.net/2.3.1/js/dataTables.min.js"></script>
     @notifyJs
     @stack('scripts')
+    <script>
+     // Load dark mode preference on page load
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark-mode");
+}
+
+// Toggle dark mode and save preference
+document.getElementById("toggleDark").addEventListener("click", function () {
+  document.body.classList.toggle("dark-mode");
+
+  if (document.body.classList.contains("dark-mode")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+});
+
+    </script>
   </body>
 </html>

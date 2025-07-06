@@ -1,14 +1,14 @@
 @extends('layouts.BackendLayout')
 @section('Banner')
 @section('title', 'Banner Management')
-<section id="menu" class="ml-3 mr-3 mt-5 m-5">
+<section id="menu" class="mx-4 mr-3 mt-5">
   <h4>Banners Management</h4>
       <div class="ro justify-between">
-        <div class="card shadow  mb-5 bg-white col-lg-12">
+        <div class="card shadow  mb-5 col-lg-12">
           <div class="card-body">
             <table class="table table-bordered">
               <thead class="thead-dark">
-                <tr class="" style="align-content: center;">
+                <tr class="align-middle text-center" >
                   <th style="width: 100px;">sl. no</th>
                   <th>Title</th>                 
                   <th>Status</th>
@@ -22,14 +22,14 @@
               
                @forelse($banners as $index=>$banner)
                
-                <tr class="text-center">
+                <tr class="text-center align-middle">
                   <td> {{ ++$index}} </td>
                   <td class="">{{ str()->headline($banner->title)  }}</td>
                   <td>
                       {!! getGeneralStatus($banner->status) !!}
                   </td>
                   <td>                                
-                    <img src="{{asset('storage/' . $banner?->banner_image)}}" alt="" style="width: 50px;">                                  
+                    <img src="{{asset('storage/' . $banner?->banner_image)}}" alt="" style="width: 80px;">                                  
                   </td>
                   <td>
                       {{ $banner->discount}}
@@ -57,11 +57,11 @@
           </div>
         </div>
 
-        <div class="card shadow p-3 mb-5 bg-white rounded col-lg-12"> 
-          <h4 class="text-center">{{ $editBanner ? 'Update' : 'Add' }} Banner</h4>
+        <div class="card shadow p-3 mb-5 rounded col-lg-12"> 
+          <h4 class="text-center py-2">{{ $editBanner ? 'Update' : 'Add' }} Banner</h4>
               <form action="{{route('banner.store', $editBanner?->id)}}" method="POST" enctype="multipart/form-data" class="form-group">     
                 @csrf      
-                  <div class="row ml-3">
+                  <di class="row ml-3">
                       <div>
                          <input type="hidden" name="id" value="{{ $editBanner?->id }}">
 
@@ -85,7 +85,7 @@
                                      </span>
                                      @enderror
                                 </div>  
-                      
+                      </div>
 
                         <div class="row">
                           <div class="col-lg-6">
@@ -109,6 +109,7 @@
                           </div>
                         </div>
                       </div>
+                      <div>
                         <label class="d-block mt-3" for="bannerImage">Banners Image<span class="text-danger">*</span></label>
                         <input class="form-control"  id="bannerImage" type="file" name="banner_image">
                           @error('banner_image') 
@@ -119,11 +120,11 @@
                        
 
                           <div class="preview_box mt-3">          
-                            <img class="image d-none" src="" alt="preview" width="100px" height="100px">                                        
+                            <img class="image d-none img-fluid" src="" alt="preview" width="100px" height="100px">                                        
                           </div>
                        
                         @if($editBanner)   
-                        <img src="{{asset('storage/' .$editBanner->banner_images)}}" alt="" width="100px" height="100px">
+                        <img src="{{asset('storage/' . $editBanner->banner_image)}}" alt="" width="100px" height="100px">
                         
                         <div class="form-check form-switch mt-2">                   
                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" {{ $editBanner?->status ? 'checked' : '' }} name="status" value="{{ true }}" >                          
@@ -134,7 +135,7 @@
                           </div>
                           @endif
                             
-                      </div>
+                      
                   </div>
                   <div class="mt-1 ml-3"><button class="btn btn-primary" type="submit">{{ $editBanner ? 'Update' : 'Submit'}}</button></div>
               </form>

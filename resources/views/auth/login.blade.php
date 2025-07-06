@@ -56,7 +56,11 @@
                      </div>
 
                       <div class="formGroup">
-                          <p class="text-center sign-text">Don't have an account? <a href="{{ route('register') }}">Register</a></p>
+                          <p class="text-center sign-text">Don't have an account? <a href="{{ route('customer.register') }}">Register</a></p>
+                        </div>
+                        <div class="formGroup text-center">
+                           <a href="{{route('google.login')}}"><img class="img-fluid" width="200px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKZss1nl7f3YaDqok4rhkSTn40DtWW0EaOiA&s" alt=""></a>
+                           <a href="{{route('facebook.login')}}"><img class="img-fluid" width="200px" src="https://www.freeiconspng.com/uploads/facebook-login-button-png-11.png" alt=""></a>
                         </div>
                     </form> 
                  </div>

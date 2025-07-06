@@ -32,6 +32,7 @@ class HomeController extends Controller
             ->get();
           $categories = $products->pluck('category')->unique('id');
           $banners = Banner::where('status', true)->take(3)->latest()->get();
+          
         return view('Frontend.home' , compact('products','categories','banners'));
     }
 

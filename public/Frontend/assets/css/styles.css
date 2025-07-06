@@ -448,6 +448,7 @@ body {
   background-repeat: no-repeat;
   max-height: var(--bannerHeight);
   height: var(--bannerHeight);
+  scroll-behavior: none;
   /* overflow: hidden; */
 }
 #banner .slider .slide .container .row,
@@ -462,6 +463,9 @@ body {
   position: absolute;
   width: 100px;
   height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   top: 20%;
   left: 80%;
@@ -469,16 +473,16 @@ body {
   background-color: var(--branding-warning);
 }
 #banner .circle p {
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
   font-weight: 600;
   font-size: 32px;
-  line-height: 220%;
   text-align: center;
   color: var(--gray-scale-white);
 }
 #banner .circle p span {
   font-weight: 500;
+  display: block;
   font-size: 16px;
   line-height: 0%;
   letter-spacing: 0.02em;
@@ -605,7 +609,9 @@ body {
 }
 
 @media (max-width: 480px) {
+  
   .box {
+    scrollbar-width: none;
     width: 100%;
   }
 }
@@ -669,21 +675,33 @@ body {
 
 /* products start here */
 #third-section .productCard {
+  padding-left: 0;
+  padding-right: 0;
   position: relative;
-  border: 1px solid var(--gren-gray-scale-100);
-  width: 100%;
-  height: 100%;
+  outline: 1px solid var(--gren-gray-scale-100);
+  /* width: 100%;
+  height: 100%; */
   max-width: 330px;
-  max-height: 428px;
+  max-height: fit-content;
   background: var(--gray-scale-white);
   overflow: hidden;
 }
 #third-section .productCard:hover {
   box-shadow: 0 0 12px 0 rgba(32, 181, 38, 0.32);
 }
-#third-section .productCard .product-img img {
-  max-width: 320px;
-  max-height: 300;
+
+#third-section .productCard .introduceImg{
+  max-height: 310px;
+  max-width: 330px;
+  /* min-height: 300px; */
+}
+#third-section .productCard .introduceImg img {
+  width: 100%;
+  max-height: 300px;
+  min-height: 300px;
+}
+.addToCartBtn span{
+  margin-right: 10px;
 }
 #third-section .productCard .product-text .cnt {
   margin: 20px 20px;
@@ -701,7 +719,7 @@ body {
 
 #third-section .productCard .newBag {
     background: var(--branding-success);  
-    padding: 16px;
+    padding: 13px;
     border-radius: 40px;
     transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -771,7 +789,6 @@ body {
 
 
 #third-section .productCard .heart .heart-icon {
-  /* margin: 0 0 6px 162px; */
   width: 24px;
   height: 18px;
   fill: var(--gray-scale-white);
@@ -796,9 +813,7 @@ body {
   border-radius: 100% !important;
   padding: 12px;
 }
-#third-section .productCard .eye {
-  /* margin: 30px 32px 0 262px; */
-}
+
 /* OVERLAY END */
 /* products end here */
 /* THIRD SECTION ENDS HERE */
@@ -809,73 +824,13 @@ body {
   background-color: var(--gray-scale-white);
   padding: 100px 0;
 }
-#drink .milk {
-  background-image: url(../drink-img/Image\(4\).svg);
-  width: 424px;
-  height: 255px;
-}
-#drink .drinkBtn {
-  margin-top: 20px;
-  border-radius: 43px;
-  padding: 14px 32px;
-  width: 162px;
-  height: 45px;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 100%;
-  color: var(--branding-success);
-  display: flex;
-  align-items: center;
-}
+
 #drink .drinkBtn,
 #drink .drinkBtn .rightArrow {
   background: var(--gray-scale-white);
   color: var(--branding-success);
 }
-#drink .milk p {
-  color: rgba(255, 255, 255, 0.8);
-}
-#drink .milk h3,
-#drink .milk p span {
-  color: var(--gray-scale-white);
-}
-#drink .water {
-  background-image: url(../drink-img/Image\(5\).svg);
-  width: 424px;
-  height: 255px;
-}
 
-#drink .water .wrapper h3,
-#drink .milk .wrapper h3,
-#drink .breakfast .wrapper h3 {
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 120%;
-  right: 32px;
-  color: var(--gren-gray-scale-900);
-}
-#drink .water .wrapper {
-  margin: 46px 0 46px 236px;
-}
-#drink .breakfast {
-  background-image: url(../drink-img/Image\(6\).svg);
-  width: 424px;
-  height: 255px;
-}
-#drink .water p,
-#drink .breakfast p {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 100%;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--gren-gray-scale-900);
-  margin: 46px 0 8px 0;
-}
-#drink .milk-breakfast:nth-of-type(1),
-#drink .milk-breakfast:nth-of-type(3) {
-  margin: 46px 32px;
-}
 /* DRINK SECTION ENDS HERE */
 /*  SEARCH IN SM SECTION STARTS HERE */
 .smSearchBtn {
@@ -1042,23 +997,19 @@ body {
 }
 /* SPECIAL DEALS SECTION ENDS HERE */
 /* FEUTURED PRODUCTS SECTION STARTS HERE */
-#feuturedProduct {
-  width: 100%;
-  padding: 100px 0;
-  height: 100%;
-  height: 625px;
-  /* margin-bottom: 100px; */
-}
 
 #feuturedProduct #third-section .group-text {
   padding-top: 0;
 }
 #feuturedProduct .productCard {
-  width: 264px;
-  height: 327px;
+  max-width: 264px;
 }
 #feuturedProduct #third-section {
-  height: 0px;
+  padding: 100px;
+}
+#feuturedProduct #third-section .productCard .featuredImg img{
+  /* max-height: 210px;
+  min-height: 210px; */
 }
 #feuturedProduct .productCard .product-text h3 {
   font-weight: 400;
@@ -1075,17 +1026,12 @@ body {
 }
 
 /* overlay start */
-#feuturedProduct .productCard .product-text .overlay .eye {
+/* #feuturedProduct .productCard .product-text .overlay .eye {
   font-size: 10px;
   width: 10px;
 }
 #feuturedProduct .productCard .product-text .groupStar {
   margin-top: 0;
-}
-/* overlay end */
-#feuturedProduct .productCard .overlay .newBag {
-  background: var(--branding-success);
-  margin: 140px 0 0 181px;
 }
 
 #feuturedProduct .productCard .heart .heart-icon {
@@ -1109,7 +1055,8 @@ body {
 #feuturedProduct .productCard .eye-icon,
 #feuturedProduct .productCard .heart .heart-icon:hover {
   background-color: var(--gray-scale-white);
-}
+} */
+/* overlay end */
 /* FEUTURED PRODUCTS SECTION ENDS HERE */
 /* REVIEW SECTION STARTS HERE */
 #review {
@@ -1793,3 +1740,9 @@ body {
   #laravel-notify {
     pointer-events: none;
 }
+
+.zoomLens {
+    max-width: 160px !important;
+    max-height: 160px !important;
+}
+

@@ -1,6 +1,6 @@
 <script>
   $(document).ready(function(){
-    $('.btnDelete').click(function(){
+    $('.btnDelete').click(function(e){
       event.preventDefault();
     Swal.fire({
       title: "Are you sure?",

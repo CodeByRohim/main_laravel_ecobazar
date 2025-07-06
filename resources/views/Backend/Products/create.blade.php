@@ -18,7 +18,7 @@
   
   <h3 class="m-4">{{ $editProduct ? 'Update' : 'Add'}} Product Section</h3>
   <div class="row m-4">
-    <div class="card shadow  mb-5 bg-white">
+    <div class="card shadow  mb-5">
       <div class="card-header">
         <h4 class="text-center">{{$editProduct ? 'Update' : 'Add'}} Product</h4>
       </div>

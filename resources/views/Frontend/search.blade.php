@@ -132,8 +132,8 @@
                                     <div class="progress"></div>
                                   </div>
                                   <div class="range-input">
-                                    <input type="range" class="range-min" min="0" max="50000" value="20000" step="100">
-                                    <input type="range" class="range-max" min="0" max="50000" value="30000" step="100">
+                                    <input type="range" class="range-min" min="0" max="50000" value="10000" step="100">
+                                    <input type="range" class="range-max" min="0" max="50000" value="40000" step="100">
                                   </div>
                                   <div class="price-input">
                                     <div class="field">
@@ -355,14 +355,15 @@
                    <!-- THIRD SECTION STARTS HERE -->
         <section id="third-section">
 
-                <div class="row mixit">
+                <div class="row gap-3 mixit">
                     <!-- product start -->
                          @forelse($products as $product)
                     
                         <div class="productCard col-lg-3 mix {{ $product->category->slug}}">                   
                             <img class="img-fluid" src="{{ getProductImage($product) }}" alt="{{ $product->title }}">
                             <div class="product-text d-flex align-items-center justify-content-between">
-                                <a href="{{route('frontend.single_product', $product->slug)}}">
+                                <a href="{{route('frontend.single_product', $product->slug)}}" >
+                                  
                                   <div class="cnt">
                                       <h3>{{$product->title}}</h3>
                                       <h2>${{$product->selling_price}} <span>${{$product->price}}</span></h2>
@@ -376,21 +377,23 @@
                                   </div>
                                 </a>
                                                                       
-                                <span
-                                    x-data="{ hover: false }"
-                                    x-on:mouseenter="hover = true"
-                                    x-on:mouseleave="hover = false"
-                                    class="bagOverlayCss"
-                                    :class="{ 'newBag': hover }"
-                                >
-                                    <img
-                                        class="img"
-                                        :src="hover 
-                                            ? '{{ asset('Frontend/assets/images/product img/Rectangle.svg') }}' 
-                                            : '{{ asset('Frontend/assets/images/Rectangle.svg') }}'"
-                                        alt="Bag"
-                                    >
-                                </span>
+                                <a href="{{route('addToCart', $product->id)}}" class="addToCartBtn">
+                                  <span
+                                      x-data="{ hover: false }"
+                                      x-on:mouseenter="hover = true"
+                                      x-on:mouseleave="hover = false"
+                                      class="bagOverlayCss"
+                                      :class="{ 'newBag': hover }"
+                                  >
+                                      <img
+                                          class="img"
+                                          :src="hover
+                                              ? '{{ asset('Frontend/assets/images/product img/Rectangle.svg') }}'
+                                              : '{{ asset('Frontend/assets/images/Rectangle.svg') }}'"
+                                          alt="Bag"
+                                      >
+                                  </span>
+                                </a>
         
                             <div class="overlay">
                                 <div class="sale">
@@ -487,5 +490,7 @@ leftHeader.addEventListener("click", () => {
 toggleButton.addEventListener("click", () => {
     leftContent.classList.toggle("show");
 });
+ 
 </Script>
+
 @endsection

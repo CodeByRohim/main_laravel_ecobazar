@@ -15,24 +15,30 @@ class BrandController extends Controller
         return view('Backend.Brand.Brands', compact('editBrand', 'id', 'brands'));
     }
 
+
     function storeOrUpdate(Request $request, $id = null)
     {
         $request->validate([
             'title' => "required|min:3|unique:brands,title,$id",
-            'icon' => $id ? 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048' : 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'icon' => $id ? 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048' : 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
         
-        if($request->hasFile('icon')) {
-          $titleIcon = $request->title . "." . $request->icon->extension();
-          $icon = $request->icon->storeAs('brands', $titleIcon , 'public');
-        }
+        
         
         $brand = Brand::findOrNew($id);
+
         $brand->title = $request->title;
-        if ($request->hasFile('icon') && isset($brand->icon_)) {
+
+        if ($request->hasFile('icon') && $brand->icon) {
             Storage::disk('public')->delete($brand->icon);
         }
+
+        if($request->hasFile('icon')) {
+                $titleIcon = $request->title . "." . $request->icon->extension();
+                $icon = $request->icon->storeAs('brands', $titleIcon , 'public');
+            }
         $brand->icon = $icon ?? $brand->icon;
+        
         $brand->slug = str()->slug($request->title);
         $isExists = Brand::where('id', '!=', $id)->where('slug', str()->slug($request->title))->exists();
         if ($isExists) {

@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
   public  function index(){
+    // shopping cart
      $user = Auth::guard('customer')->user() ?? Auth::guard('web')->user();
      $userId = $user?->id;
         
-    $item = Cart::with('product')
+    $item = Cart::with('product:id,slug,title,price,selling_price,featured_image')
         ->when($user, function ($query) use ($user, $userId) {
             $query->where('userable_type', get_class($user))
                   ->where('userable_id', $userId);
@@ -24,20 +25,12 @@ class CartController extends Controller
         })
         ->get();
 
-        $product = Product::where('status', true)->first();
-        if($user && $userId){
-         session()->put('checkout_item', $item);
-        session()->put('checkout_product', $product);
-        session()->put('checkout_UserId', $userId);
-        session()->put('checkout_User', $user);
-
-
-        }
-        
-        return view('Frontend.Cart.addToCart',compact('item','product'));
+        // $product = Product::where('status', true)->first();
+    
+        return view('Frontend.Cart.addToCart',compact('item'));
+       
     }
 
-  
 
   public  function addToCart(Request $request,$id){
         if(!Product::where('id',$id)->exists()){
@@ -149,7 +142,7 @@ class CartController extends Controller
     //     }
     // })
 
-    $user = auth()->user() ?? Auth::guard('customer')->user();
+    $user = Auth::guard('web')->user() ?? Auth::guard('customer')->user();
     $userId = $user?->id;
     $userType = $user ? get_class($user) : null;
 
@@ -200,43 +193,6 @@ class CartController extends Controller
 
 
 
-/*
-  function qtyUpdate($id = null,$operator = 'increment', $qty = 1){
-    // update
-    if(!Product::where('id',$id)->exists()){
-            return  response()->json(['status' => 'error','msg' => 'Product not found'], 401);
-        }
-
-//    $query = Cart::query()->where(function ($q) {
-//           return  $q->where('ip',request()->ip())->orWhere('userable_id', auth()?->user()?->id);
-//           })->where('product_id', $id);
-   $userId = auth()?->user()?->id ?? Auth::guard('customer')->user()?->id;
-   $userType = auth()?->check() ? get_class(auth()->user()) : get_class(Auth::guard('customer')->user());
-
-   $query = Cart::query()->where(function ($q) use ($userId, $userType) {
-       $q->where('ip', request()->ip());
-
-       if ($userId && $userType) {
-           $q->orWhere(function ($q2) use ($userId, $userType) {
-               $q2->where('userable_id', $userId)
-                  ->where('userable_type', $userType);
-           });
-       }
-   })->where('product_id', $id);
-
-
-
-    if($operator == 'increment'){
-        $query->increment('qty', $qty);
-    } else  if($operator == 'decrement'){
-        $query->decrement('qty', $qty);
-    } else{
-                return  response()->json(['status' => 'error','msg' => 'Inavalid operator'], 401);
-
-    }
-
-  }
-*/
 function qtyUpdate($id = null, $operator = 'increment', $qty = 1)
 {
     if (!Product::where('id', $id)->exists()) {

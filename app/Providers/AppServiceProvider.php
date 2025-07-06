@@ -61,5 +61,11 @@ class AppServiceProvider extends ServiceProvider
          ->with('brands', Brand::where('status', true)->latest()->get())
          ->with('cartCount', $cartCount);
 });
+
+
+View::composer('layouts.BackendLayout', function ($view) {
+        $product = Product::select('id', 'title', 'qty', 'alert_qty')->first();
+        $view->with('product', $product);
+    });
 }
 }

@@ -132,8 +132,8 @@
                                     <div class="progress"></div>
                                   </div>
                                   <div class="range-input">
-                                    <input type="range" class="range-min" min="0" max="50000" value="20000" step="100">
-                                    <input type="range" class="range-max" min="0" max="50000" value="30000" step="100">
+                                    <input type="range" class="range-min" min="0" max="50000" value="10000" step="100">
+                                    <input type="range" class="range-max" min="0" max="50000" value="40000" step="100">
                                   </div>
                                   <div class="price-input">
                                     <div class="field">
@@ -354,8 +354,9 @@
                     <!-- Product Cards -->
                    <!-- THIRD SECTION STARTS HERE -->
         <section id="third-section">
-
-                <div class="row mixit">
+        
+                <div class="row gap-3 mixit">
+                  
                     <!-- product start -->
                          @forelse($products as $product)
                     

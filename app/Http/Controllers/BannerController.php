@@ -15,25 +15,22 @@ class BannerController extends Controller
     }
     function storeOrUpdate(BannerRequest $request,$id = null){
 
-          $banner = Banner::findOrNew($id);
-         // ========== BANNER IMAGES UPLOAD ==========
-        //   dd($request->banner_image->extension());
-        if($request->hasFile('banner_image')){
-           
-                if ($banner->banner_image) {
-                // Delete old image if exists
-                $oldBannerImage = $banner->banner_image;
-                Storage::disk('public')->delete($oldBannerImage ?? '');
-                }
-          
+    // banners ok--------------------
+
+          if($request->hasFile('banner_image')){ 
             $name = $request->title . "-banner." . "." . time() . "." . $request->banner_image->extension();
-            $path = $request->banner_image->storeAs('banners', $name, 'public');
-            $bannerImage = $path;
-            
+            $path = $request->banner_image->storeAs('banners', $name, 'public'); 
             }
-           $banner->banner_image = $bannerImage;
+
+           $banner = Banner::findOrNew($id);
+          
         
-        
+          if ($request->hasFile('banner_image') && $banner->banner_image) {
+                // Delete old image if exists
+                Storage::disk('public')->delete($banner->banner_image);
+                }
+
+                 $banner->banner_image = $path ?? $banner->banner_image;
          //========== SAVE BANNER DATA ==========
          if($id){
              $banner->status = $request->status ?? false;

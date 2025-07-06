@@ -2,7 +2,7 @@
 
 if (!function_exists('getProfileImage')) {
     function getProfileImage() {
-        return "https://api.dicebear.com/9.x/initials/svg?seed=". auth()->user()->name;
+        return "https://api.dicebear.com/9.x/initials/svg?seed=". auth()->user()->name ?? 'User';
     }
 // } else {
 //     function getProfileImage() {
@@ -39,3 +39,5 @@ if(!function_exists('getImage')){
         return $path ? asset('storage/' . $path) : 'https://motobros.com/wp-content/uploads/2024/09/no-image.jpeg';
     }
 }
+
+

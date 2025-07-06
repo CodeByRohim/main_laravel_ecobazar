@@ -123,8 +123,20 @@
                                 <!-- profilePic start -->
                                 <div class="profilePic col-12 col-lg-6">
                                     <div class="profileImg">
-                                        <!-- <img class="img-fluid" src="./images/Ellipse 5.png" alt=""> -->
-                                        <img style="width: 120px; height:120px" class="img-fluid rounded-circle" src="" alt="">
+
+                                        @php
+                                            $imageUrl = "https://storage.googleapis.com/your-bucket-name/";
+                                        @endphp
+
+                                        {{-- <a  href=""> --}}
+                                            <img
+                                            style="width: 120px; height:120px"
+                                            class="img-fluid rounded-circle"
+                                            src="{{  $customer->image }}"
+                                            alt="Customer Image"
+                                            >
+                                        {{-- </a> --}}
+
                                     </div>
                                     <div class="profileText">
                                         <h3>                                         
